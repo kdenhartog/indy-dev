@@ -7,9 +7,13 @@ This is an easy to configure development environment to play around with Hyperle
 3. docker build -f indy-pool.dockerfile -t indy_pool .
 4. docker build -f indy-dev.dockerfile -t indy_dev .
 
-## How to start
+## How to start (OS X and Linux)
 1. docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
 2. docker run -it --net=host -p 127.0.0.1:8080:8080 -v $(pwd):/home/indy indy_dev
+
+## How to start (Windows)
+1. docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
+2. docker run -it --net=host -p 127.0.0.1:8080:8080 -v %cd%:/home/indy indy_dev
 
 ## Test Python environment
 Once inside the docker shell (started in step 2 of "how to start"):
