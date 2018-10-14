@@ -61,9 +61,9 @@ async def run():
         if ex.error_code == ErrorCode.WalletAlreadyExistsError:
             pass
 
-    logger.info("==============================================")
-    logger.info("=== Onboarding A+ Accountants to ledger =====")
-    logger.info("----------------------------------------------")
+    logger.info("===========================================")
+    logger.info("=== Onboarding A+ Accountants to ledger ===")
+    logger.info("-------------------------------------------")
 
     logger.info("\"Bob\" -> Create wallet")
     employer_wallet_config = json.dumps({"id": "A+_Accountant_wallet"})

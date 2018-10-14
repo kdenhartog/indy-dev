@@ -13,7 +13,6 @@ from src.utils import get_pool_genesis_txn_path, run_coroutine, PROTOCOL_VERSION
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-
 async def run():
     logger.info("Getting started -> started")
 

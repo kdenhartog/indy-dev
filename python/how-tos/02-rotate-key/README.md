@@ -1,9 +1,7 @@
 # Rotate a Key
 
-Indy-SDK Developer Walkthrough #2, Python Edition
-
-[ [Java](../java/README.md) | [.NET](../../not-yet-written.md) | [Node.js](../../not-yet-written.md) | [Objective C](../../not-yet-written.md) ]
-
+This shows how to change the verkey that the ledger associates with
+a DID. It builds on ["Write DID and Query Its Verkey"](../write-did-and-query-verkey/README.md).
 
 ## Prerequisites
 
