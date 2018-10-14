@@ -29,3 +29,7 @@ If the getting started guide completes through the end of cleanup everything is 
 ## improvement plans
 * Create Makefile
 * Add Node.js wrapper support
+
+##Makefile remarks
+* Run chmod 777 for the shell scripts folder chmod -R 777 helperscripts or each one individually
+* Run the command make inside of the directory
