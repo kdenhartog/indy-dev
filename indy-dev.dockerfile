@@ -17,7 +17,8 @@ WORKDIR /home/indy
 RUN pip3 install -U \
     pip \
     setuptools \
-    python3-indy==1.6.2-dev-720
+    python3-indy==1.6.2-dev-720 \
+    asyncio
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68DB5E88 \
     && add-apt-repository "deb https://repo.sovrin.org/sdk/deb xenial master" \
