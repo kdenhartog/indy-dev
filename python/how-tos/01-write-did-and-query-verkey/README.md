@@ -3,7 +3,7 @@
 Indy-SDK Developer Walkthrough #1, Python Edition
 
 This is designed to show a working example of the writing the DID to the ledger and then submitting a query to the ledger
-to get it's verkey.
+to get it's verkey. 
 
 ## Prerequisites
 
@@ -102,7 +102,7 @@ the preceding write transaction are bundled, sent, and awaited.
 
 ## Step 6
 
-Run the completed demo and observe the whole sequence.
+Run the completed demo and observe the whole sequence. If you're having issues, compare against write_did_and_query_verkey.py to find where you've got issues.
 
 ## Common errors
 Error `PoolLedgerConfigAlreadyExistsError`.   
