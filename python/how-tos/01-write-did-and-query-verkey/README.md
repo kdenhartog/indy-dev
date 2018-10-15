@@ -2,20 +2,18 @@
 
 Indy-SDK Developer Walkthrough #1, Python Edition
 
-[ [Java](../java/README.md) | [.NET](../../not-yet-written.md) | [Node.js](../../not-yet-written.md) | [Objective C](../../not-yet-written.md) ]
-
+This is designed to show a working example of the writing the DID to the ledger and then submitting a query to the ledger
+to get it's verkey.
 
 ## Prerequisites
 
-Setup your workstation with an indy development virtual machine (VM). See [prerequisites](../../prerequisites.md). 
-
-Ensure you have the 64-bit version of Python 3 installed, as the 32-bit version may have problems loading the Indy .dll files.
+run the [build script]() to setup the indy_pool and indy_dev container to run code in.
 
 ## Steps
 
 ### Step 1
 
-In your normal workstation operating system (not the VM), open a python editor of your
+On your host machine, open a python editor of your
 choice and paste the code from [template.py](template.py)
 into a new file. We will be modifying this code in later steps.
 
@@ -23,8 +21,6 @@ Save the doc as `write_did.py`
 
 This is a very simple app framework into which you'll plug the code
 you'll be writing.
-
-Install the required python packages by executing: `$ pip install python3-indy asyncio`
 
 ### Step 2
 
@@ -58,7 +54,7 @@ Save the updated version of `write_did.py`.
 Study the changes.
 
 A few operations in indy [can only be done by identities (DIDs) with
-special roles](https://docs.google.com/spreadsheets/d/1TWXF7NtBjSOaUIBeIH77SyZnawfo91cJ_ns4TR-wsq4/edit?usp=sharing). For example, a DID that is a *steward* can add a node (the one
+[special roles](https://docs.google.com/spreadsheets/d/1TWXF7NtBjSOaUIBeIH77SyZnawfo91cJ_ns4TR-wsq4/edit?usp=sharing). For example, a DID that is a *steward* can add a node (the one
 they own) to the validator pool, and can create DIDs with a *trust anchor*
 role. A trust anchor DID can add arbitrary DIDs to the ledger.
 
@@ -108,23 +104,6 @@ the preceding write transaction are bundled, sent, and awaited.
 
 Run the completed demo and observe the whole sequence.
 
-## More experiments
-
-Most of the code in this how-to exists to satisfy some preconditions.
-Now that you have a trust anchor identity, you can write or query
-any number of additional identities to the ledger, with just a handful of
-lines of code. Try creating some.
-
-You might try the ["Rotate a Key"](../../rotate-key/python/README.md)
-how-to, which can be done in only one step one you complete this one.
-
-You could also try to create a new steward identity without a seed, or
-with a different seed, and see what kind of error you get. Only identities
-with a trustee role can create stewards.
-
-There is an additional example in `extra/add_nym.py` which builds and submits 
-nym request to the ledger.
-
 ## Common errors
 Error `PoolLedgerConfigAlreadyExistsError`.   
 Delete config before creating:
@@ -145,11 +124,5 @@ except IndyError:
     await wallet.delete_wallet(wallet_name, wallet_credentials)
     await wallet.create_wallet(pool_name, wallet_name, None, None, wallet_credentials)
 ```
-
-Error `CommonIOError`. Make sure that you have set `genesis_file_path` to point 
-to your `indy-sdk/cli/docker_pool_transactions_genesis`. 
-
-Error `PoolLedgerTimeout`. Make sure that the pool of local nodes in Docker is running on the same ip/ports as 
-in the `docker_pool_transactions_genesis` (for further details see [How to start local nodes pool with docker](https://github.com/hyperledger/indy-sdk/blob/master/README.md#how-to-start-local-nodes-pool-with-docker))
 
 
