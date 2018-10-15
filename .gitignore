@@ -1,4 +1,5 @@
 # VSCODE
 .vscode
 
+#dev environment files
 .bash_history
