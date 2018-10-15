@@ -17,11 +17,14 @@ import pprint
 from indy import pool, ledger, wallet, did
 from indy.error import IndyError
 
+from src.utils import get_pool_genesis_txn_path, run_coroutine, PROTOCOL_VERSION
 
-pool_name = 'pool'
-genesis_file_path = '/home/vagrant/code/evernym/indy-sdk/cli/docker_pool_transactions_genesis'
+
+pool_name = 'pool1'
+pool_genesis_txn_path = "/home/indy/.indy_client/pool/pool1.txn"
 wallet_config = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
+
 # Set protocol version to 2 to work with the current version of Indy Node
 PROTOCOL_VERSION = 2
 
@@ -48,12 +51,7 @@ async def write_nym_and_query_verkey():
         print('Error occurred: %s' % e)
 
 
-def main():
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(write_nym_and_query_verkey())
-    loop.close()
-
-
 if __name__ == '__main__':
-    main()
+    run_coroutine(write_nym_and_query_verkey)
+    time.sleep(1)  # FIXME waiting for libindy thread complete
 

@@ -19,8 +19,8 @@ async def run():
     pool_name = 'pool1'
     logger.info("Open Pool Ledger: {}".format(pool_name))
     pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
-    print(pool_genesis_txn_path)
     pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
+    print(pool_config)
     
 
     # Set protocol version 2 to work with Indy Node 1.4

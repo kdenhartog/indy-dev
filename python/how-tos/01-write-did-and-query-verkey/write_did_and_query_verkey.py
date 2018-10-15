@@ -15,16 +15,18 @@ would be used and DIDs would be exchanged using some channel of communication
 import asyncio
 import json
 import pprint
+import time
 
-from indy import pool, ledger, wallet, did
+from indy import anoncreds, crypto, did, ledger, pool, wallet
 from indy.error import IndyError
 
+from src.utils import get_pool_genesis_txn_path, run_coroutine, PROTOCOL_VERSION
 
-pool_name = 'pool'
-wallet_name = 'wallet'
-genesis_file_path = '/home/vagrant/code/evernym/indy-sdk/cli/docker_pool_transactions_genesis'
+pool_name = 'pool1'
+pool_genesis_txn_path = "/home/indy/.indy_client/pool/pool1.txn"
+wallet_name = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
-
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
 
 def print_log(value_color="", value_noncolor=""):
@@ -36,23 +38,27 @@ def print_log(value_color="", value_noncolor=""):
 
 async def write_nym_and_query_verkey():
     try:
-        # 1.
-        print_log('\n1. Creates a new local pool ledger configuration that is used '
-                  'later when connecting to ledger.\n')
-        pool_config = json.dumps({'genesis_txn': genesis_file_path})
-        await pool.create_pool_ledger_config(config_name=pool_name, config=pool_config)
+        
+        # Set protocol version 2 to work with Indy Node 1.4
+        await pool.set_protocol_version(PROTOCOL_VERSION)
+
+        try:
+            await pool.create_pool_ledger_config(pool_name, pool_config)
+        except IndyError as ex:
+            if ex.error_code == ErrorCode.PoolLedgerConfigAlreadyExistsError:
+                pass
 
         # 2.
         print_log('\n2. Open pool ledger and get handle from libindy\n')
-        pool_handle = await pool.open_pool_ledger(config_name=pool_name, config=None)
-
+        pool_handle = await pool.open_pool_ledger(pool_name, None)
+        
         # 3.
         print_log('\n3. Creating new secure wallet\n')
-        await wallet.create_wallet(pool_name, wallet_name, None, None, wallet_credentials)
+        await wallet.create_wallet(wallet_name, wallet_credentials)
 
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        wallet_handle = await wallet.open_wallet(wallet_name, None, wallet_credentials)
+        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
 
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')
@@ -133,13 +139,7 @@ async def write_nym_and_query_verkey():
     except IndyError as e:
         print('Error occurred: %s' % e)
 
-
-def main():
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(write_nym_and_query_verkey())
-    loop.close()
-
-
 if __name__ == '__main__':
-    main()
+    run_coroutine(write_nym_and_query_verkey)
+    time.sleep(1)  # FIXME waiting for libindy thread complete
 
