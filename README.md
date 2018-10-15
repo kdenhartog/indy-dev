@@ -19,25 +19,39 @@ to cleanup the docker images built run: `make cleanup`
 ## Windows
 Your milage may vary on Windows and will be tougher to work with, continue at your own risk.
 
-1. docker build -f indy-pool.dockerfile -t indy_pool .
-2. docker build -f indy-dev.dockerfile -t indy_dev .
-3. docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
-4. docker run -it --net=host -p 127.0.0.1:8080:8080 -v %cd%:/home/indy indy_dev
+```
+docker build -f indy-pool.dockerfile -t indy_pool .
+docker build -f indy-dev.dockerfile -t indy_dev .
+docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
+docker run -it --net=host -p 127.0.0.1:8080:8080 -v %cd%:/home/indy indy_dev
+```
 
 ## Test Python environment
 Once inside the docker shell (started in step 2 of "how to start"):
 
-1. cd python
-2. python3 getting_started.py
+```
+cd python
+python3 getting_started.py
+```
 
 If the getting started guide completes through the end of cleanup everything is working correctly.
 
 ## Going through the IndySDK How-to guides
 
+Details to be added shortly
 
 ## improvement plans
-* Create Makefile
-* Add Node.js wrapper support
+* Fix Python How-to guides
+* Finish DID-Auth example
+* Add support for different versions of SDKs
+* Add Node.js wrapper support (help wanted)
+* Add Java wrapper support (help wanted)
+* Add .net wrapper support (help wanted)
+* Add Objective C wrapper support (help wanted)
 
 ## Makefile issues?
-* Run chmod +x on the files in [scripts](../scripts)
+```
+cd scripts
+chmod +x *.sh
+```
+
