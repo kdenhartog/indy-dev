@@ -11,7 +11,7 @@ def path_home() -> Path:
 
 
 def get_pool_genesis_txn_path(pool_name):
-    path_temp = path_home().joinpath("indy")
+    path_temp = path_home().joinpath("pool")
     path = path_temp.joinpath("{}.txn".format(pool_name))
     save_pool_genesis_txn_file(path)
     return path
