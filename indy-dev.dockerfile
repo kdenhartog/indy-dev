@@ -28,4 +28,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68DB5E88 \
 
 USER indy
 
+# If you're working on your own project in a separate dir structure, change this to set the proper entry point for python.
+ENV PYTHONPATH="/home/indy/python"
+
 EXPOSE 8080
