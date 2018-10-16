@@ -12,15 +12,18 @@ claim definition for the Schema added by Steward.
 import asyncio
 import json
 import pprint
+import time
 
 from indy import pool, ledger, wallet, did, anoncreds
 from indy.error import ErrorCode, IndyError
 
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
-pool_name = 'pool'
-wallet_name = 'wallet'
-genesis_file_path = '../indy-sdk/cli/docker_pool_transactions_genesis'
+pool_name = 'pool1'
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
+wallet_name = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""
@@ -30,34 +33,26 @@ def print_log(value_color="", value_noncolor=""):
 
 
 async def write_schema_and_cred_def():
-    
     try:
-        await pool.set_protocol_version(2)
+        # Set protocol version 2 to work with Indy Node 1.4
+        await pool.set_protocol_version(PROTOCOL_VERSION)
+
         # 1.
         print_log('\n1. Creates a new local pool ledger configuration that is used '
                   'later when connecting to ledger.\n')
-        pool_config = json.dumps({'genesis_txn': genesis_file_path})
-        try:
-            await pool.create_pool_ledger_config(pool_name, pool_config)
-        except IndyError:
-            await pool.delete_pool_ledger_config(config_name=pool_name)
-            await pool.create_pool_ledger_config(pool_name, pool_config)
+        await pool.create_pool_ledger_config(pool_name, pool_config)
 
         # 2.
         print_log('\n2. Open pool ledger and get handle from libindy\n')
-        pool_handle = await pool.open_pool_ledger(config_name=pool_name, config=None)
+        pool_handle = await pool.open_pool_ledger(pool_name, None)
 
         # 3.
         print_log('\n3. Creating new secure wallet\n')
-        try:
-            await wallet.create_wallet(pool_name, wallet_name, None, None, wallet_credentials)
-        except IndyError:
-            await wallet.delete_wallet(wallet_name, wallet_credentials)
-            await wallet.create_wallet(pool_name, wallet_name, None, None, wallet_credentials)
+        await wallet.create_wallet(wallet_name, wallet_credentials)
 
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        wallet_handle = await wallet.open_wallet(wallet_name, None, wallet_credentials)
+        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
 
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')
@@ -148,12 +143,6 @@ async def write_schema_and_cred_def():
     except IndyError as e:
         print('Error occurred: %s' % e)
 
-
-def main():
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(write_schema_and_cred_def())
-    loop.close()
-
-
 if __name__ == '__main__':
-    main()
+    run_coroutine(write_schema_and_cred_def)
+    time.sleep(1)  # FIXME waiting for libindy thread complete

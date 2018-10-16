@@ -1,28 +1,18 @@
-        # 1.
-        print_log('\n1. Creates a new local pool ledger configuration that is used '
-                'later when connecting to ledger.\n')
-        pool_config = json.dumps({'genesis_txn': genesis_file_path})
-        try:
-            await pool.create_pool_ledger_config(pool_name, pool_config)
-        except IndyError:
-            await pool.delete_pool_ledger_config(config_name=pool_name)
-            await pool.create_pool_ledger_config(pool_name, pool_config)
-    
+        # Set protocol version 2 to work with Indy Node 1.4
+        await pool.set_protocol_version(PROTOCOL_VERSION)
+        await pool.create_pool_ledger_config(pool_name, pool_config)
+
         # 2.
         print_log('\n2. Open pool ledger and get handle from libindy\n')
-        pool_handle = await pool.open_pool_ledger(config_name=pool_name, config=None)
-    
+        pool_handle = await pool.open_pool_ledger(pool_name, None)
+
         # 3.
         print_log('\n3. Creating new secure wallet\n')
-        try:
-            await wallet.create_wallet(wallet_config, wallet_credentials)
-        except IndyError:
-            await wallet.delete_wallet(wallet_config, wallet_credentials)
-            await wallet.create_wallet(wallet_config, wallet_credentials)
-    
+        await wallet.create_wallet(wallet_name, wallet_credentials)
+
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        wallet_handle = await wallet.open_wallet(wallet_config, wallet_credentials)
+        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
     
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')

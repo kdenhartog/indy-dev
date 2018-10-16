@@ -17,11 +17,13 @@ from indy import pool, ledger, wallet, did, anoncreds
 from indy.error import IndyError
 
 
-pool_name = 'pool'
-genesis_file_path = '/home/vagrant/code/evernym/indy-sdk/cli/docker_pool_transactions_genesis'
-wallet_config = json.dumps({"id": "wallet"})
+
+
+pool_name = 'pool1'
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
+wallet_name = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
-PROTOCOL_VERSION=2
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""

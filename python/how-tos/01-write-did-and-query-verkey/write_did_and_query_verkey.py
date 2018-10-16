@@ -42,6 +42,9 @@ async def write_nym_and_query_verkey():
         # Set protocol version 2 to work with Indy Node 1.4
         await pool.set_protocol_version(PROTOCOL_VERSION)
 
+        # 1.
+        print_log('\n1. Creates a new local pool ledger configuration that is used '
+                  'later when connecting to ledger.\n')
         await pool.create_pool_ledger_config(pool_name, pool_config)
 
         # 2.
