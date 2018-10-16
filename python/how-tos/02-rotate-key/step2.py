@@ -1,6 +1,7 @@
 		# Tell SDK which pool you are going to use. You should have already started
 		# this pool using docker compose or similar. Here, we are dumping the config
-		# just for demonstration purposes.
+		# just for demonstration purposes. This follows the same steps as the write-did-and-query-verkey
+		# tutorial.
 		print_log('1. Creates a new local pool ledger configuration that is used '
 				  'later when connecting to ledger.\n')
 		pool_config = json.dumps({'genesis_txn': str(genesis_file_path)})

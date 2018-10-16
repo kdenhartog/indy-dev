@@ -19,21 +19,19 @@ added by Steward
 import asyncio
 import json
 import pprint
+import time
 
 from indy import pool, ledger, wallet, did
 from indy.error import IndyError
 
-from src.utils import get_pool_genesis_txn_path, PROTOCOL_VERSION
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
-
-pool_name = 'pool'
-genesis_file_path = get_pool_genesis_txn_path(pool_name)
-
-wallet_config = json.dumps({"id": "wallet"})
+pool_name = 'pool1'
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
+wallet_name = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
-# Set protocol version to 2 to work with the current version of Indy Node
-PROTOCOL_VERSION = 2
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""
@@ -44,25 +42,22 @@ def print_log(value_color="", value_noncolor=""):
 
 async def rotate_key_on_the_ledger():
     try:
-        await pool.set_protocol_version(PROTOCOL_VERSION)
 
-        # 1.
-        print_log('1. Creates a new local pool ledger configuration that is used '
-                  'later when connecting to ledger.\n')
-        pool_config = json.dumps({'genesis_txn': str(genesis_file_path)})
-        await pool.create_pool_ledger_config(config_name=pool_name, config=pool_config)
+        # Set protocol version 2 to work with Indy Node 1.4
+        await pool.set_protocol_version(PROTOCOL_VERSION)
+        await pool.create_pool_ledger_config(pool_name, pool_config)
 
         # 2.
         print_log('\n2. Open pool ledger and get handle from libindy\n')
-        pool_handle = await pool.open_pool_ledger(config_name=pool_name, config=None)
+        pool_handle = await pool.open_pool_ledger(pool_name, None)
 
         # 3.
-        print_log('\n3. Creating new secure wallet with the given unique name\n')
-        await wallet.create_wallet(wallet_config, wallet_credentials)
+        print_log('\n3. Creating new secure wallet\n')
+        await wallet.create_wallet(wallet_name, wallet_credentials)
 
         # 4.
-        print_log('\n4. Open wallet and get handle from libindy to use in methods that require wallet access\n')
-        wallet_handle = await wallet.open_wallet(wallet_config, wallet_credentials)
+        print_log('\n4. Open wallet and get handle from libindy\n')
+        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
 
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')
@@ -152,7 +147,7 @@ async def rotate_key_on_the_ledger():
 
         # 18.
         print_log('\n18. Deleting created wallet\n')
-        await wallet.delete_wallet(wallet_config, wallet_credentials)
+        await wallet.delete_wallet(wallet_name, wallet_credentials)
 
         # 19.
         print_log('\n19. Deleting pool ledger config')
@@ -161,13 +156,9 @@ async def rotate_key_on_the_ledger():
     except IndyError as e:
         print('Error occurred: %s' % e)
 
-
-def main():
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(rotate_key_on_the_ledger())
-    loop.close()
-
-
 if __name__ == '__main__':
-    main()
+    run_coroutine(rotate_key_on_the_ledger)
+    time.sleep(1)  # FIXME waiting for libindy thread complete
+        
+    
 

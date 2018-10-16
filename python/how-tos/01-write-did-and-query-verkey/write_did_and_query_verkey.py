@@ -17,13 +17,13 @@ import json
 import pprint
 import time
 
-from indy import anoncreds, crypto, did, ledger, pool, wallet
+from indy import pool, ledger, wallet, did
 from indy.error import IndyError
 
-from src.utils import get_pool_genesis_txn_path, run_coroutine, PROTOCOL_VERSION
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
 pool_name = 'pool1'
-pool_genesis_txn_path = "/home/indy/.indy_client/pool/pool1.txn"
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
 wallet_name = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
@@ -42,11 +42,7 @@ async def write_nym_and_query_verkey():
         # Set protocol version 2 to work with Indy Node 1.4
         await pool.set_protocol_version(PROTOCOL_VERSION)
 
-        try:
-            await pool.create_pool_ledger_config(pool_name, pool_config)
-        except IndyError as ex:
-            if ex.error_code == ErrorCode.PoolLedgerConfigAlreadyExistsError:
-                pass
+        await pool.create_pool_ledger_config(pool_name, pool_config)
 
         # 2.
         print_log('\n2. Open pool ledger and get handle from libindy\n')
