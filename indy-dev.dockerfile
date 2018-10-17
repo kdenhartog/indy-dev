@@ -29,3 +29,5 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68DB5E88 \
 USER indy
 
 EXPOSE 8080
+#change for your own dev env
+ENV PYTHONPATH="/home/indy/python"
