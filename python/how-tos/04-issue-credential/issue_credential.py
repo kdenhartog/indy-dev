@@ -16,17 +16,20 @@ Finally, Prover stores Credential in its wallet.
 import asyncio
 import json
 import pprint
-import time
-
-from indy import pool, ledger, wallet, did, anoncreds
-from indy.error import ErrorCode, IndyError
+import sys
 
 from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
-pool_name = 'pool1'
-pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
-wallet_name = json.dumps({"id": "wallet"})
+from indy import pool, ledger, wallet, did, anoncreds, crypto
+from indy.error import IndyError
+
+
+seq_no = 1
+pool_name = 'pool'
 wallet_credentials = json.dumps({"key": "wallet_key"})
+steward_wallet_config = json.dumps({"id": "steward_wallet"})
+issuer_wallet_config = json.dumps({"id": "issuer_wallet"})
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
 
@@ -52,24 +55,27 @@ async def issue_credential():
         pool_handle = await pool.open_pool_ledger(pool_name, None)
 
         # 3.
-        print_log('\n3. Creating new secure wallet\n')
-        await wallet.create_wallet(wallet_name, wallet_credentials)
+        print_log('\n3. Creating new issuer, steward, and prover secure wallet\n')
+        await wallet.create_wallet(issuer_wallet_config, wallet_credentials)
+        await wallet.create_wallet(steward_wallet_config, wallet_credentials)
 
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
+        issuer_wallet_handle = await wallet.open_wallet(issuer_wallet_config, wallet_credentials)
+        steward_wallet_handle = await wallet.open_wallet(steward_wallet_config, wallet_credentials)
 
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')
         steward_seed = '000000000000000000000000Steward1'
         did_json = json.dumps({'seed': steward_seed})
-        steward_did, steward_verkey = await did.create_and_store_my_did(wallet_handle, did_json)
+        steward_did, steward_verkey = await did.create_and_store_my_did(steward_wallet_handle, did_json)
         print_log('Steward DID: ', steward_did)
         print_log('Steward Verkey: ', steward_verkey)
 
         # 6.
-        print_log('\n6. Generating and storing trust anchor DID and verkey\n')
-        trust_anchor_did, trust_anchor_verkey = await did.create_and_store_my_did(wallet_handle, "{}")
+        print_log(
+            '\n6. Generating and storing trust anchor (also issuer) DID and verkey\n')
+        trust_anchor_did, trust_anchor_verkey = await did.create_and_store_my_did(issuer_wallet_handle, "{}")
         print_log('Trust anchor DID: ', trust_anchor_did)
         print_log('Trust anchor Verkey: ', trust_anchor_verkey)
 
@@ -86,14 +92,15 @@ async def issue_credential():
         # 8.
         print_log('\n8. Sending NYM request to the ledger\n')
         nym_transaction_response = await ledger.sign_and_submit_request(pool_handle=pool_handle,
-                                                                        wallet_handle=wallet_handle,
+                                                                        wallet_handle=steward_wallet_handle,
                                                                         submitter_did=steward_did,
                                                                         request_json=nym_transaction_request)
         print_log('NYM transaction response: ')
         pprint.pprint(json.loads(nym_transaction_response))
 
         # 9.
-        print_log('\n9. Build the SCHEMA request to add new schema to the ledger as a Steward\n')
+        print_log(
+            '\n9. Build the SCHEMA request to add new schema to the ledger as a Steward\n')
         seq_no = 1
         schema = {
             'seqNo': seq_no,
@@ -117,18 +124,18 @@ async def issue_credential():
 
         # 10.
         print_log('\n10. Sending the SCHEMA request to the ledger\n')
-        schema_response = await ledger.sign_and_submit_request(pool_handle, wallet_handle, steward_did, schema_request)
+        schema_response = await ledger.sign_and_submit_request(pool_handle, steward_wallet_handle, steward_did, schema_request)
         print_log('Schema response:')
         pprint.pprint(json.loads(schema_response))
 
         # 11.
-        print_log('\n11. Creating and storing CRED DEFINITION using anoncreds as Trust Anchor, for the given Schema\n')
+        print_log(
+            '\n11. Creating and storing CRED DEFINITION using anoncreds as Trust Anchor, for the given Schema\n')
         cred_def_tag = 'cred_def_tag'
         cred_def_type = 'CL'
         cred_def_config = json.dumps({"support_revocation": False})
 
-        (cred_def_id, cred_def_json) = await anoncreds.issuer_create_and_store_credential_def(wallet_handle, trust_anchor_did, json.dumps(schema_data),
-                                                                               cred_def_tag, cred_def_type, cred_def_config)
+        (cred_def_id, cred_def_json) = await anoncreds.issuer_create_and_store_credential_def(issuer_wallet_handle, trust_anchor_did, json.dumps(schema_data), cred_def_tag, cred_def_type, cred_def_config)
         print_log('Credential definition: ')
         pprint.pprint(json.loads(cred_def_json))
 
@@ -146,27 +153,30 @@ async def issue_credential():
         master_secret_id = await anoncreds.prover_create_master_secret(prover_wallet_handle, master_secret_name)
 
         # 14.
-        print_log('\n14. Issuer (Trust Anchor) is creating a Credential Offer for Prover\n')
+        print_log(
+            '\n14. Issuer (Trust Anchor) is creating a Credential Offer for Prover\n')
         schema_json = json.dumps(schema)
-        cred_offer_json = await anoncreds.issuer_create_credential_offer(wallet_handle, cred_def_id)
+        cred_offer_json = await anoncreds.issuer_create_credential_offer(issuer_wallet_handle, cred_def_id)
         print_log('Credential Offer: ')
         pprint.pprint(json.loads(cred_offer_json))
 
         # 15.
-        print_log('\n15. Prover creates Credential Request for the given credential offer\n')
+        print_log(
+            '\n15. Prover creates Credential Request for the given credential offer\n')
         (cred_req_json, cred_req_metadata_json) = await anoncreds.prover_create_credential_req(prover_wallet_handle, prover_did, cred_offer_json, cred_def_json, master_secret_id)
         print_log('Credential Request: ')
         pprint.pprint(json.loads(cred_req_json))
 
         # 16.
-        print_log('\n16. Issuer (Trust Anchor) creates Credential for Credential Request\n')
+        print_log(
+            '\n16. Issuer (Trust Anchor) creates Credential for Credential Request\n')
         cred_values_json = json.dumps({
             'sex': ['male', '5944657099558967239210949258394887428692050081607692519917050011144233115103'],
             'name': ['Alex', '1139481716457488690172217916278103335'],
             'height': ['175', '175'],
             'age': ['28', '28']
         })
-        (cred_json, _, _) = await anoncreds.issuer_create_credential(wallet_handle, cred_offer_json, cred_req_json, cred_values_json, None, None)
+        (cred_json, _, _) = await anoncreds.issuer_create_credential(issuer_wallet_handle, cred_offer_json, cred_req_json, cred_values_json, None, None)
         print_log('Credential: ')
         pprint.pprint(json.loads(cred_json))
 
@@ -174,15 +184,16 @@ async def issue_credential():
         print_log('\n17. Prover processes and stores Credential\n')
         await anoncreds.prover_store_credential(prover_wallet_handle, None, cred_req_metadata_json, cred_json, cred_def_json, None)
 
+
         # 18.
         print_log('\n18. Closing both wallet_handles and pool\n')
-        await wallet.close_wallet(wallet_handle)
+        await wallet.close_wallet(issuer_wallet_handle)
         await wallet.close_wallet(prover_wallet_handle)
         await pool.close_pool_ledger(pool_handle)
 
         # 19.
         print_log('\n19. Deleting created wallet_handles\n')
-        await wallet.delete_wallet(wallet_config, wallet_credentials)
+        await wallet.delete_wallet(issuer_wallet_config, wallet_credentials)
         await wallet.delete_wallet(prover_wallet_config, prover_wallet_credentials)
 
         # 20.

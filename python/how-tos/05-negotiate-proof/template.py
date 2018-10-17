@@ -15,7 +15,7 @@ import json
 import pprint
 import sys
 
-sys.path.insert(0, '/home/vagrant/code/evernym/indy-sdk/wrappers/python')
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
 from indy import pool, ledger, wallet, did, anoncreds, crypto
 from indy.error import IndyError
@@ -23,11 +23,12 @@ from indy.error import IndyError
 
 seq_no = 1
 pool_name = 'pool'
-issuer_wallet_name = 'issuer_wallet'
-prover_wallet_name = 'prover_wallet'
-issuer_did = 'NcYxiDXkpYi6ov5FcYDi1e'
-prover_did = 'VsKV7grR1BUE29mG2Fm2kX'
-genesis_file_path = '/home/vagrant/code/evernym/indy-sdk/cli/docker_pool_transactions_genesis'
+wallet_credentials = json.dumps({"key": "wallet_key"})
+steward_wallet_config = json.dumps({"id": "steward_wallet"})
+issuer_wallet_config = json.dumps({"id": "issuer_wallet"})
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
+
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""
@@ -38,13 +39,12 @@ def print_log(value_color="", value_noncolor=""):
 
 async def proof_negotiation():
     try:
+        await pool.set_protocol_version(PROTOCOL_VERSION)
         # Step 2 code goes here.
 
         # Step 3 code goes here.
 
         # Step 4 code goes here.
-
-        # Step 5 code goes here.
 
     except IndyError as e:
         print('Error occurred: %s' % e)
@@ -58,4 +58,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

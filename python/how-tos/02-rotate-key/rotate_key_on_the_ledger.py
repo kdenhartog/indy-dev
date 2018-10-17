@@ -28,7 +28,7 @@ from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
 pool_name = 'pool1'
 pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
-wallet_name = json.dumps({"id": "wallet"})
+wallet_config = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
@@ -57,11 +57,11 @@ async def rotate_key_on_the_ledger():
 
         # 3.
         print_log('\n3. Creating new secure wallet\n')
-        await wallet.create_wallet(wallet_name, wallet_credentials)
+        await wallet.create_wallet(wallet_config, wallet_credentials)
 
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)
+        wallet_handle = await wallet.open_wallet(wallet_config, wallet_credentials)
 
         # 5.
         print_log('\n5. Generating and storing steward DID and verkey\n')
@@ -151,7 +151,7 @@ async def rotate_key_on_the_ledger():
 
         # 18.
         print_log('\n18. Deleting created wallet\n')
-        await wallet.delete_wallet(wallet_name, wallet_credentials)
+        await wallet.delete_wallet(wallet_config, wallet_credentials)
 
         # 19.
         print_log('\n19. Deleting pool ledger config')
@@ -160,9 +160,15 @@ async def rotate_key_on_the_ledger():
     except IndyError as e:
         print('Error occurred: %s' % e)
 
+
+def main():
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(rotate_key_on_the_ledger())
+    loop.close()
+
+
 if __name__ == '__main__':
-    run_coroutine(rotate_key_on_the_ledger)
-    time.sleep(1)  # FIXME waiting for libindy thread complete
+    main()
         
     
 

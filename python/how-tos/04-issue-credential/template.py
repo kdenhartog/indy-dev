@@ -16,16 +16,21 @@ Finally, Prover stores Credential in its wallet.
 import asyncio
 import json
 import pprint
+import sys
 
-from indy import pool, ledger, wallet, did, anoncreds
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
+
+from indy import pool, ledger, wallet, did, anoncreds, crypto
 from indy.error import IndyError
 
 
+seq_no = 1
 pool_name = 'pool'
-genesis_file_path = '/home/vagrant/code/evernym/indy-sdk/cli/docker_pool_transactions_genesis'
-wallet_config = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
-PROTOCOL_VERSION=2
+steward_wallet_config = json.dumps({"id": "steward_wallet"})
+issuer_wallet_config = json.dumps({"id": "issuer_wallet"})
+pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
+pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
 
 def print_log(value_color="", value_noncolor=""):
@@ -37,7 +42,7 @@ def print_log(value_color="", value_noncolor=""):
 
 async def issue_credential():
     try:
-        await pool.set_protocol_version(2)
+        await pool.set_protocol_version(PROTOCOL_VERSION)
         # Step 2 code goes here.
 
         # Step 3 code goes here.
