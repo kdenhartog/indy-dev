@@ -3,7 +3,6 @@ async def init():
     wallet_config = '{"id": "%s-wallet"}' % me
     wallet_credentials = '{"key": "%s-wallet-key"}' % me
 
-    # 1. Create Wallet and Get Wallet Handle
     try:
         await wallet.create_wallet(wallet_config, wallet_credentials)
     except:
