@@ -1,8 +1,9 @@
 import json
 import logging
+import time
 from typing import Optional
 
-from indy import anoncreds, crypto, did, ledger, pool, wallet, pairwise
+from indy import crypto, did, ledger, pool, wallet
 from indy.error import ErrorCode, IndyError
 from src.utils import get_pool_genesis_txn_path, run_coroutine, PROTOCOL_VERSION
 
@@ -29,6 +30,9 @@ async def run():
     logger.info("\"Sovrin Steward\" -> Create wallet")
     steward_wallet_config = json.dumps({"id": "sovrin_steward_wallet"})
     steward_wallet_credentials = json.dumps({"key": "steward_wallet_key"})
+
+    faber_wallet_config = json.dumps({"id": "faber_steward_wallet"})
+    faber_wallet_credentials = json.dumps({"key": "faber_wallet_key"})
     try:
         await wallet.create_wallet(steward_wallet_config, steward_wallet_credentials)
     except IndyError as ex:
@@ -133,6 +137,11 @@ async def onboarding(pool_handle, _from, from_wallet, from_did, to, to_wallet: O
     await send_nym(pool_handle, from_wallet, from_did, to_from_did, to_from_key, None)
 
     return to_wallet, from_to_key, to_from_did, to_from_key, decrypted_connection_response
+
+
+async def send_nym(pool_handle, wallet_handle, _did, new_did, new_key, role):
+    nym_request = await ledger.build_nym_request(_did, new_did, new_key, None, role)
+    await ledger.sign_and_submit_request(pool_handle, wallet_handle, _did, nym_request)
 
 if __name__ == '__main__':
     run_coroutine(run)
