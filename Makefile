@@ -13,3 +13,6 @@ stop:
 cleanup:
 	./scripts/cleanup.sh
 
+refresh:
+	./scripts/refresh.sh
+

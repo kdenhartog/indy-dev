@@ -8,13 +8,13 @@ This is an easy to configure development environment to play around with Hyperle
 
 ## Using with Unix systems (OS X and Linux)
 
-to build the indy_pool and indy_dev images run: `make build`
+to build the indy_pool and indy_dev images run: `sudo make build`
 
-to start up the pool and the dev environment in the current working directory run: `make start`
+to start up the pool and the dev environment in the current working directory run: `sudo make start`
 
-to stop the docker containers, first exit the indy_dev container with `exit` and then run: `make stop`
+to stop the docker containers, first exit the indy_dev container with `exit` and then run: `sudo make stop`
 
-to cleanup the docker images built run: `make cleanup`
+to cleanup the docker images built run: `sudo make cleanup`
 
 ## Windows
 Your milage may vary on Windows and will be tougher to work with, continue at your own risk.
@@ -35,6 +35,8 @@ python3 getting_started.py
 ```
 
 If the getting started guide completes through the end of cleanup everything is working correctly.
+
+to refresh the container and cleanup the data in the wallets and the pool.txn file use `sudo make refresh`
 
 ## Going through the IndySDK How-to guides
 
