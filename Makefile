@@ -5,7 +5,7 @@ build:
 	./scripts/build.sh
 
 start:
-	./scripts/start.sh
+	./scripts/start.sh $(DIR)
 
 stop:
 	./scripts/stop.sh
