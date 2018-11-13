@@ -11,3 +11,6 @@ input.txt
 # virtual environments
 venv
 env
+
+#pycache files
+python/src/__pycache__/
