@@ -26,7 +26,7 @@ seq_no = 1
 pool_name = 'pool'
 wallet_credentials = json.dumps({"key": "wallet_key"})
 steward_wallet_config = json.dumps({"id": "steward_wallet"})
-issuer_wallet_config = json.dumps({"id": "issuer_wallet"})
+trust_anchor_wallet_config = json.dumps({"id": "issuer_wallet"})
 pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
 
@@ -53,12 +53,12 @@ async def proof_negotiation():
 
         # 3.
         print_log('\n3. Creating new issuer, steward, and prover secure wallet\n')
-        await wallet.create_wallet(issuer_wallet_config, wallet_credentials)
+        await wallet.create_wallet(trust_anchor_wallet_config, wallet_credentials)
         await wallet.create_wallet(steward_wallet_config, wallet_credentials)
 
         # 4.
         print_log('\n4. Open wallet and get handle from libindy\n')
-        issuer_wallet_handle = await wallet.open_wallet(issuer_wallet_config, wallet_credentials)
+        trust_anchor_wallet_handle = await wallet.open_wallet(trust_anchor_wallet_config, wallet_credentials)
         steward_wallet_handle = await wallet.open_wallet(steward_wallet_config, wallet_credentials)
 
         # 5.
@@ -72,7 +72,7 @@ async def proof_negotiation():
         # 6.
         print_log(
             '\n6. Generating and storing trust anchor (also issuer) DID and verkey\n')
-        trust_anchor_did, trust_anchor_verkey = await did.create_and_store_my_did(issuer_wallet_handle, "{}")
+        trust_anchor_did, trust_anchor_verkey = await did.create_and_store_my_did(trust_anchor_wallet_handle, "{}")
         print_log('Trust anchor DID: ', trust_anchor_did)
         print_log('Trust anchor Verkey: ', trust_anchor_verkey)
 
@@ -99,7 +99,7 @@ async def proof_negotiation():
         (gvt_schema_id, gvt_schema) = await anoncreds.issuer_create_schema(trust_anchor_did, 'gvt', '1.0',
                                                                 json.dumps(['age', 'sex', 'height', 'name']))
         schema_request = await ledger.build_schema_request(trust_anchor_did, gvt_schema)
-        await ledger.sign_and_submit_request(pool_handle, issuer_wallet_handle, trust_anchor_did, schema_request)
+        await ledger.sign_and_submit_request(pool_handle, trust_anchor_wallet_handle, trust_anchor_did, schema_request)
         print_log('Create Schema and submiting to ledger')
         pprint.pprint(json.loads(schema_request))
 
@@ -116,7 +116,10 @@ async def proof_negotiation():
         cred_def_type = 'CL'
         cred_def_config = json.dumps({"support_revocation": False})
 
-        (cred_def_id, cred_def_json) = await anoncreds.issuer_create_and_store_credential_def(issuer_wallet_handle, trust_anchor_did, gvt_schema_json, cred_def_tag, cred_def_type, cred_def_config)
+        (cred_def_id, cred_def_json) = await anoncreds.issuer_create_and_store_credential_def(trust_anchor_wallet_handle, trust_anchor_did, gvt_schema_json, cred_def_tag, cred_def_type, cred_def_config)
+        cred_def_request = await ledger.build_cred_def_request(trust_anchor_did, cred_def_json)
+        await ledger.sign_and_submit_request(pool_handle, trust_anchor_wallet_handle, trust_anchor_did, cred_def_request)
+        
         print_log('Credential definition: ')
         pprint.pprint(json.loads(cred_def_json))
 
@@ -137,7 +140,7 @@ async def proof_negotiation():
         print_log(
             '\n14. Issuer (Trust Anchor) is creating a Credential Offer for Prover\n')
         schema_json = json.dumps(gvt_schema)
-        cred_offer_json = await anoncreds.issuer_create_credential_offer(issuer_wallet_handle, cred_def_id)
+        cred_offer_json = await anoncreds.issuer_create_credential_offer(trust_anchor_wallet_handle, cred_def_id)
         print_log('Credential Offer: ')
         pprint.pprint(json.loads(cred_offer_json))
 
@@ -157,7 +160,7 @@ async def proof_negotiation():
             'height': ['175', '175'],
             'age': ['28', '28']
         })
-        (cred_json, _, _) = await anoncreds.issuer_create_credential(issuer_wallet_handle, cred_offer_json, cred_req_json, cred_values_json, None, None)
+        (cred_json, _, _) = await anoncreds.issuer_create_credential(trust_anchor_wallet_handle, cred_offer_json, cred_req_json, cred_values_json, None, None)
         print_log('Credential: ')
         pprint.pprint(json.loads(cred_json))
 
@@ -216,42 +219,35 @@ async def proof_negotiation():
         get_schema_response = await ledger.submit_request(pool_handle, get_schema_request)
         (received_schema_id, received_schema) = await ledger.parse_get_schema_response(get_schema_response)
         schemas_json[received_schema_id] = json.loads(received_schema)
-        
-        # cred_defs_json = {}
-        # c_def_id = json.loads(cred_def_json).get("id")
-        # print(c_def_id)
-        # get_cred_def_request = await ledger.build_get_cred_def_request(trust_anchor_did, c_def_id)
-        # get_cred_def_response = await ledger.submit_request(pool_handle, get_cred_def_request)
-        # (received_cred_def_id, received_cred_def) = await ledger.parse_get_cred_def_response(get_cred_def_response)
-        # cred_defs_json[received_cred_def_id] = json.loads(received_cred_def)
+
+        cred_defs_json = {}
+        get_cred_def_request = await ledger.build_get_cred_def_request(prover_did, cred_def_id)
+        get_cred_def_response = await ledger.submit_request(pool_handle, get_cred_def_request)
+        (received_cred_def_id, received_cred_def) = await ledger.parse_get_cred_def_response(get_cred_def_response)
+        cred_defs_json[received_cred_def_id] = json.loads(received_cred_def)
         
         revoc_regs_json = json.dumps({})
 
-        print("\n\n proof_req_json: " + proof_req_json + "\n\n")
-        # print(requested_credentials_json + "\n\n")
-        # print(master_secret_id + "\n\n")
-        # print(schemas_json + "\n\n")
-        # print(cdefs_json + "\n\n")
-        # print(revoc_regs_json + "\n\n")
-
-        proof_json = await anoncreds.prover_create_proof(prover_wallet_handle, proof_req_json, requested_credentials_json, master_secret_id, json.dumps(schemas_json), cred_def_json, revoc_regs_json)
+        proof_json = await anoncreds.prover_create_proof(prover_wallet_handle, proof_req_json, requested_credentials_json, master_secret_id, json.dumps(schemas_json), json.dumps(cred_defs_json), revoc_regs_json)
         proof = json.loads(proof_json)
        
         #assert 'Alex' == proof['requested_proof']['revealed_attrs']['attr1_referent'][1]
 
         # 20.
-        print_log('\n11.Verifier is verifying proof from Prover\n')
-        #assert await anoncreds.verifier_verify_proof(proof_req_json, proof_json, schemas_json, claim_defs_json, revoc_regs_json)
+        print_log('\n20.Verifier is verifying proof from Prover\n')
+        assert await anoncreds.verifier_verify_proof(proof_req_json, proof_json, json.dumps(schemas_json), json.dumps(cred_defs_json), revoc_regs_json, "{}")
 
         # 21
-        print_log('\n12. Closing both wallet_handles\n')
-        await wallet.close_wallet(issuer_wallet_handle)
+        print_log('\n21. Closing both wallet_handles\n')
+        await wallet.close_wallet(steward_wallet_handle)
+        await wallet.close_wallet(trust_anchor_wallet_handle)
         await wallet.close_wallet(prover_wallet_handle)
 
         # 22
-        print_log('\n13. Deleting created wallet_handles\n')
-        await wallet.delete_wallet(prover_wallet_name, wallet_credentials)
-        await wallet.delete_wallet(issuer_wallet_name, wallet_credentials)
+        print_log('\n22. Deleting created wallet_handles\n')
+        await wallet.delete_wallet(steward_wallet_config, wallet_credentials)
+        await wallet.delete_wallet(trust_anchor_wallet_config, wallet_credentials)
+        await wallet.delete_wallet(prover_wallet_config, prover_wallet_credentials)
 
     except IndyError as e:
         print('Error occurred: %s' % e)
