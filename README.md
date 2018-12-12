@@ -21,7 +21,7 @@ If you do not have a account on [docker hub](https://hub.docker.com) signup for 
 1. Once you've setup an account go to labs.play-with-docker.com and **sign in** using your docker hub account.
 2. Now, Click the **Start** button, available after signing in.
 3. Once you're in here, you should see a **+ ADD NEW INSTANCE** button on the left side.
-4. Inside of this terminal run `git clone https://github.com/kdenhartog/Indy-dev.git`
+4. Inside of this terminal run `git clone https://github.com/kdenhartog/indy-dev.git`
 
 you now can run the commands available in the Unix systems section below.
 
