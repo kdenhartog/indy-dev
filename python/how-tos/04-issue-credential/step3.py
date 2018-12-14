@@ -1,3 +1,4 @@
+
         # 12.
         print_log('\n12. Creating Prover wallet and opening it to get the handle\n')
         prover_did = 'VsKV7grR1BUE29mG2Fm2kX'

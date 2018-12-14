@@ -39,7 +39,6 @@ def print_log(value_color="", value_noncolor=""):
     ENDC = '\033[0m'
     print(HEADER + value_color + ENDC + str(value_noncolor))
 
-
 async def issue_credential():
     try:
         await pool.set_protocol_version(PROTOCOL_VERSION)
