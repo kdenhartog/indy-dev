@@ -7,6 +7,7 @@
         # transaction to the ledger, creating our *next* DID (which is truly new). This is why we use a hard-coded seed
         # when creating this DID--it guarantees that the same DID and key material are created that the genesis txns
         # expect.
+        print_log('\n5. Generating and storing steward DID and verkey\n')
         steward_seed = '000000000000000000000000Steward1'
         did_json = json.dumps({'seed': steward_seed})
         steward_did, steward_verkey = await did.create_and_store_my_did(wallet_handle, did_json)

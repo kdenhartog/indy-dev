@@ -6,16 +6,14 @@
         # this file. The IndySDK is designed to throw an error if you create a pool_genesis_txn_file
         # with the same name. This accounts for that to protect the developer for good dev usability.
 
-        pool_config = json.dumps({'genesis_txn': str(pool_genesis_txn_path)})
-        print_log('\n1. Create new pool ledger configuration to connect to ledger.\n')
-        try:
-            await pool.create_pool_ledger_config(pool_name, pool_config)
-        except IndyError as ex:
-            if ex.error_code == ErrorCode.PoolLedgerConfigAlreadyExistsError:
-                pass
+        # 1.
+        print_log('\n1. Creates a new local pool ledger configuration that is used '
+                'later when connecting to ledger.\n')
+        await pool.create_pool_ledger_config(pool_name, pool_config)
 
-        print_log('\n2. Open ledger and get handle\n')
-        pool_handle = await pool.open_pool_ledger(config_name=pool_name, config=None)
+        # 2.
+        print_log('\n2. Open pool ledger and get handle from libindy\n')
+        pool_handle = await pool.open_pool_ledger(pool_name, None)
 
 
         # Creates a wallet using a generic config. Be sure to check the IndySDK python wrapper for
@@ -26,9 +24,11 @@
         # proper protection of the wallet. DO NOT HARDCODE THIS IN PRODUCTION. Once we've created the
         # wallet we're now going to open it which allows us to interact with it by passing the
         # wallet_handle around.
+       
+        # 3.
+        print_log('\n3. Creating new secure wallet\n')
+        await wallet.create_wallet(wallet_name, wallet_credentials)
 
-        print_log('\n3. Create new identity wallet\n')
-        await wallet.create_wallet(wallet_config, wallet_credentials)
-
-        print_log('\n4. Open identity wallet and get handle\n')
-        wallet_handle = await wallet.open_wallet(wallet_config, wallet_credentials)
+        # 4.
+        print_log('\n4. Open wallet and get handle from libindy\n')
+        wallet_handle = await wallet.open_wallet(wallet_name, wallet_credentials)

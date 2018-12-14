@@ -3,10 +3,10 @@
         # This call will look up the private key of the steward DID in our wallet, and use it to sign the transaction.
         print_log('\n7. Building NYM request to add Trust Anchor to the ledger\n')
         nym_transaction_request = await ledger.build_nym_request(submitter_did=steward_did,
-                                                                 target_did=trust_anchor_did,
-                                                                 ver_key=trust_anchor_verkey,
-                                                                 alias=None,
-                                                                 role='TRUST_ANCHOR')
+                                                                target_did=trust_anchor_did,
+                                                                ver_key=trust_anchor_verkey,
+                                                                alias=None,
+                                                                role='TRUST_ANCHOR')
         print_log('NYM transaction request: ')
         pprint.pprint(json.loads(nym_transaction_request))
 
