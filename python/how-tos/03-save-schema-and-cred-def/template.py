@@ -12,18 +12,19 @@ claim definition for the Schema added by Steward.
 import asyncio
 import json
 import pprint
+import time
 
 from indy import pool, ledger, wallet, did, anoncreds
-from indy.error import IndyError
+from indy.error import ErrorCode, IndyError
 
-
-
+from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
 pool_name = 'pool1'
 pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
-wallet_name = json.dumps({"id": "wallet"})
+wallet_config = json.dumps({"id": "wallet"})
 wallet_credentials = json.dumps({"key": "wallet_key"})
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
+
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""

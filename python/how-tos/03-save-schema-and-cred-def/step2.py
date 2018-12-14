@@ -1,5 +1,4 @@
-        # Set protocol version 2 to work with Indy Node 1.4
-        await pool.set_protocol_version(PROTOCOL_VERSION)
+        #This is the same work as what we did from how-to 01
 
         # 1.
         print_log('\n1. Creates a new local pool ledger configuration that is used '
@@ -45,8 +44,8 @@
         # 8.
         print_log('\n8. Sending NYM request to the ledger\n')
         nym_transaction_response = await ledger.sign_and_submit_request(pool_handle=pool_handle,
-                                                                wallet_handle=wallet_handle,
-                                                                submitter_did=steward_did,
-                                                                request_json=nym_transaction_request)
+                                                                        wallet_handle=wallet_handle,
+                                                                        submitter_did=steward_did,
+                                                                        request_json=nym_transaction_request)
         print_log('NYM transaction response: ')
         pprint.pprint(json.loads(nym_transaction_response))
