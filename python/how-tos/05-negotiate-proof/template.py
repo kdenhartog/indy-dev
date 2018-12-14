@@ -14,6 +14,7 @@ import asyncio
 import json
 import pprint
 import sys
+import time
 
 from src.utils import run_coroutine, get_pool_genesis_txn_path, PROTOCOL_VERSION
 
@@ -25,10 +26,9 @@ seq_no = 1
 pool_name = 'pool'
 wallet_credentials = json.dumps({"key": "wallet_key"})
 steward_wallet_config = json.dumps({"id": "steward_wallet"})
-issuer_wallet_config = json.dumps({"id": "issuer_wallet"})
+trust_anchor_wallet_config = json.dumps({"id": "issuer_wallet"})
 pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
 pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
-
 
 def print_log(value_color="", value_noncolor=""):
     """set the colors for text."""
@@ -45,6 +45,8 @@ async def proof_negotiation():
         # Step 3 code goes here.
 
         # Step 4 code goes here.
+
+        # Step 5 code goes here.
 
     except IndyError as e:
         print('Error occurred: %s' % e)

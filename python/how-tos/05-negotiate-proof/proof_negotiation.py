@@ -188,7 +188,7 @@ async def proof_negotiation():
                 }
             }
         }
-        #'restrictions': [{'issuer_did': trust_anchor_did}]
+        'restrictions': [{'issuer_did': trust_anchor_did}]
         print_log('Proof Request: ')
         pprint.pprint(proof_request)
         proof_req_json = json.dumps(proof_request)
@@ -231,7 +231,7 @@ async def proof_negotiation():
         proof_json = await anoncreds.prover_create_proof(prover_wallet_handle, proof_req_json, requested_credentials_json, master_secret_id, json.dumps(schemas_json), json.dumps(cred_defs_json), revoc_regs_json)
         proof = json.loads(proof_json)
        
-        #assert 'Alex' == proof['requested_proof']['revealed_attrs']['attr1_referent'][1]
+        assert 'Alex' == proof['requested_proof']['revealed_attrs']['attr1_referent'][1]
 
         # 20.
         print_log('\n20.Verifier is verifying proof from Prover\n')
