@@ -74,13 +74,13 @@ After you've gotten a chance to build the environment and go through the getting
 As an example: ` make start DIR=/home/user/example/project/`
 
 ## improvement plans
-* Fix Python How-to guides
-* Finish DID-Auth example
-* Add support for different versions of SDKs
+* Add fix for browser support
+* Finish DID-Auth Python example
 * Add Node.js wrapper support (help wanted)
 * Add Java wrapper support (help wanted)
 * Add .net wrapper support (help wanted)
 * Add Objective C wrapper support (help wanted)
+* Add support for different versions of SDKs
 
 ## Makefile issues?
 ```
