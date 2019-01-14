@@ -42,16 +42,38 @@ to cleanup the docker images built run: `sudo make cleanup`
 to refresh the container and cleanup the data in the wallets and the pool.txn file use `sudo make refresh`
 
 ## Windows
-Your milage may vary on Windows and will be tougher to work with, continue at your own risk.
+The steps below have been tested with Windows 10 Professional but the following previous caveat still applies: Your mileage may vary on Windows and will be tougher to work with, continue at your own risk.
 
 Alternatively, if you've not been able to get docker setup on windows, **Use the in-browser setup instead.**
 
+### Assumptions
+1. You want to clone (download) the `indy-dev` project into a folder called `C:\INDY\indy-dev`. If you prefer a top-level folder that is different from `C:\INDY`, this is a safe and easy change to make.
+2. Docker Desktop for Windows 10 Version 2.0.0.0-win81 (29211) or greater is installed on your Windows 10 computer.
+3. Docker Desktop is configured to use Linux containers (and not Windows containers).
+4. The following steps do not assume or require that you have installed the Windows 10 Linux subsystem feature installed on your Windows 10 computer.
+5. The following steps assume you have used the Docker Desktop app to share your C: (or alternate drive partitiion) with a Linux container. 
+   - Start the Docker Desktop app by clicking the Docker icon in the Task Bar System Tray.
+   - Click Settings
+   - Select Share Drives
+   - Select C: (or an alternate drive)
+   - Click Apply
+   - When prompted, enter your local Windows 10 login credentials to enable Docker to create a shared drive.
+   ![Docker Desktop: Share C: Drive](images/Win10-DockerDesktop-ShareCDrive.png)
+6. Enter the following commands using either the `Powershell` or `Windowws Command Line` console:
 ```
+c:
+mkdir c:\INDY
+git clone https://github.com/kdenhartog/indy-dev.git
+
+cd  c:\INDY\indy-dev
 docker build -f indy-pool.dockerfile -t indy_pool .
 docker build -f indy-dev.dockerfile -t indy_dev .
 docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
-docker run -it --net=host -p 127.0.0.1:8080:8080 -v %cd%:/home/indy indy_dev
+docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev indy_dev
 ```
+NOTE: The construction `C:/INDY/indy-dev:/indy-dev` is necessary under Windows 10 because if the `:/indy-dev` alias is missing, you end up with an unusable shared folder called `C:/INDY/indy-dev` in your Linux session.
+
+REFERENCE:  https://forums.docker.com/t/volume-mounts-in-windows-does-not-work/10693/7
 
 ## Test Python environment
 Once inside the docker shell (started in step 2 of "how to start"):
