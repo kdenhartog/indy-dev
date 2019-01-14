@@ -61,11 +61,12 @@ Alternatively, if you've not been able to get docker setup on windows, **Use the
    ![Docker Desktop: Share C: Drive](images/Win10-DockerDesktop-ShareCDrive.png)
 6. Enter the following commands using either the `Powershell` or `Windowws Command Line` console:
 ```
-c:
 mkdir c:\INDY
+c:
+cd c:\INDY
 git clone https://github.com/kdenhartog/indy-dev.git
 
-cd  c:\INDY\indy-dev
+cd indy-dev
 docker build -f indy-pool.dockerfile -t indy_pool .
 docker build -f indy-dev.dockerfile -t indy_dev .
 docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
