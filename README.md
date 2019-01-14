@@ -42,7 +42,7 @@ to cleanup the docker images built run: `sudo make cleanup`
 to refresh the container and cleanup the data in the wallets and the pool.txn file use `sudo make refresh`
 
 ## Windows
-THe steps below have been tested with Windows 10 Professional but the following previous caveat still applies: Your milage may vary on Windows and will be tougher to work with, continue at your own risk.
+The steps below have been tested with Windows 10 Professional but the following previous caveat still applies: Your mileage may vary on Windows and will be tougher to work with, continue at your own risk.
 
 Alternatively, if you've not been able to get docker setup on windows, **Use the in-browser setup instead.**
 
