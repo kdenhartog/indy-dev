@@ -77,14 +77,24 @@ NOTE: The construction `C:/INDY/indy-dev:/indy-dev` is necessary under Windows 1
 REFERENCE:  https://forums.docker.com/t/volume-mounts-in-windows-does-not-work/10693/7
 
 ## Test Python environment
-Once inside the docker shell (started in step 2 of "how to start"):
+Once inside the docker shell (started in step 2 of "how to start"),
+enter the following commands:
 
 ```
+cd /
+cd indy-dev
 cd python
 python3 getting_started.py
 ```
-
 If the getting started guide completes through the end of cleanup everything is working correctly.
+
+The initial console output will look something like the following:
+
+![python3 getting_started.py console output - start](images/python3-getting_started_py-start.png)
+
+...and when finished, the last part of the console output will look something like:
+
+![python3 getting_started.py console output -end](images/python3-getting_started_py-end.png)
 
 ## Going through the IndySDK How-to guides
 
