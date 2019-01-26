@@ -1,4 +1,4 @@
-indy@linuxkit-00155d000c0b:/indy-dev/python$ python3 getting_started-numbered.py >getting_started-numbered.log
+indy@linuxkit-00155d000c0b:/indy-dev/python$ python3 getting_started-numbered.py
 INFO:__main__:0.0.0 Getting started -> started
 INFO:__main__:0.0.1 Open Pool Ledger: pool1
 INFO:__main__:==============================
