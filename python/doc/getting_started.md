@@ -104,7 +104,9 @@ TODO - Agent communications is simulated.
 
 To write and read the ledger's transactions after gaining the proper role, you'll need to make a connection to the Indy nodes pool. To make a connection to the different pools that exist, like the Sovrin pool or the local pool we started by ourselves as part of this tutorial, you'll need to set up a pool configuration.
 
-![Connect to the Indy Nodes Pool](images/Indy-SDK-Getting-Started-0.0.png)
+![Connect to the Indy Nodes Pool](images/Indy-SDK-Getting-Started-0.0-InitialState.png)
+
+![Connect to the Indy Nodes Pool](images/Indy-SDK-Getting-Started-0.0-FinalState.png)
 
 The list of nodes in the pool is stored in the ledger as NODE transactions. Libindy allows you to restore the actual list of NODE transactions by a few known transactions that we call genesis transactions. Each **Pool Configuration** is defined as a pair of pool configuration name and pool configuration JSON. The most important field in pool configuration json is the path to the file with the list of genesis transactions. Make sure this path is correct.
 
