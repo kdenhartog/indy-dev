@@ -8,7 +8,7 @@
   - [A Developer Guide for Hyperledger Indy-SDK `getting_started.py` Script](#a-developer-guide-for-hyperledger-indy-sdk-gettingstartedpy-script)
   - [What are Hyperledger Indy and `libindy` and Why They Matter](#what-are-hyperledger-indy-and-libindy-and-why-they-matter)
   - [What We’ll Cover: The Scenario](#what-well-cover-the-scenario)
-  - [The Scenario: Alice Buys a Red Lamborghini](#the-scenario-alice-buys-a-red-lamborghini)
+  - [The Scenario: Alice Buys a Big Red Car (aka Lamborghini)](#the-scenario-alice-buys-a-big-red-car-aka-lamborghini)
   - [The Actors](#the-actors)
     - [Alice](#alice)
     - [Other Actors](#other-actors)
@@ -54,7 +54,7 @@ The sorts of identity and trust interactions required to pull this off are messy
 
 Ready?
 
-## The Scenario: Alice Buys a Red Lamborghini
+## The Scenario: Alice Buys a Big Red Car (aka Lamborghini)
 
 As a graduate of Faber College, Alice receives an alumni newsletter where she learns that her alma mater is offering digital transcripts. She logs in to the college alumni website and requests her transcript by clicking **Get Transcript**.  (Other ways to initiate this request might include scanning a QR code, downloading a transcript package from a published URL, etc.)
 

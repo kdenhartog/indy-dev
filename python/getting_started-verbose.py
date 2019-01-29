@@ -171,6 +171,9 @@ async def run():
 
     logger.info("2.3.1 \"Faber\" -> Get \"Transcript\" Schema from Ledger")
     (_, transcript_schema) = await get_schema(pool_handle, faber_did, transcript_schema_id)
+    print("Get Transcript schema using Faber DID: " + faber_did)
+    print("Transcript schema id: " + transcript_schema_id)
+    print("Transcript schema: " + transcript_schema)
 
     logger.info("2.3.2 \"Faber\" -> Create and store in Wallet \"Faber Transcript\" Credential Definition")
     (faber_transcript_cred_def_id, faber_transcript_cred_def_json) = \
@@ -222,7 +225,7 @@ async def run():
     logger.info("3.2.1 \"Faber\" -> Create \"Transcript\" Credential Offer for Alice")
     transcript_cred_offer_json = \
         await anoncreds.issuer_create_credential_offer(faber_wallet, faber_transcript_cred_def_id)
-    print("Transcript credential offer: " + transcript_cred_offer_json)
+    print("Created Transcript credential offer: " + transcript_cred_offer_json)
 
     logger.info("3.2.2 \"Faber\" -> Get key for Alice did")
     alice_faber_verkey = await did.key_for_did(pool_handle, acme_wallet, faber_alice_connection_response['did'])
@@ -239,20 +242,21 @@ async def run():
 
     logger.info("3.2.6 \"Alice\" -> Create and store \"Alice\" Master Secret in Wallet")
     alice_master_secret_id = await anoncreds.prover_create_master_secret(alice_wallet, None)
+    print("Created Alice Master Secret ID: " + alice_master_secret_id)
 
     logger.info("3.2.7 \"Alice\" -> Get \"Faber Transcript\" Credential Definition from Ledger")
     (faber_transcript_cred_def_id, faber_transcript_cred_def) = \
         await get_cred_def(pool_handle, alice_faber_did, authdecrypted_transcript_cred_offer['cred_def_id'])
-    print("Transcript credential definition id: " + faber_transcript_cred_def_id)
-    print("Transcript credential definition: " + faber_transcript_cred_def)
+    print("Get Transcript Credential Definition ID: " + faber_transcript_cred_def_id)
+    print("Get Transcript Credential Definition: " + faber_transcript_cred_def)
 
     logger.info("3.2.8 \"Alice\" -> Create \"Transcript\" Credential Request for Faber")
     (transcript_cred_request_json, transcript_cred_request_metadata_json) = \
         await anoncreds.prover_create_credential_req(alice_wallet, alice_faber_did,
                                                      authdecrypted_transcript_cred_offer_json,
                                                      faber_transcript_cred_def, alice_master_secret_id)
-    print("Transcript credential request: " + transcript_cred_request_json)
-    print("Transcript credential request metadata: " + transcript_cred_request_metadata_json)
+    print("Created Transcript Credential Request: " + transcript_cred_request_json)
+    print("Created Transcript Credential Request Metadata: " + transcript_cred_request_metadata_json)
 
     logger.info("3.2.9 \"Alice\" -> Authcrypt \"Transcript\" Credential Request for Faber")
     authcrypted_transcript_cred_request = await crypto.auth_crypt(alice_wallet, alice_faber_key, faber_alice_verkey,
@@ -278,7 +282,7 @@ async def run():
         await anoncreds.issuer_create_credential(faber_wallet, transcript_cred_offer_json,
                                                  authdecrypted_transcript_cred_request_json,
                                                  transcript_cred_values, None, None)
-    print("Transcript credential: " + transcript_cred_json)
+    print("Created Transcript Credential: " + transcript_cred_json)
 
     logger.info("3.2.13 \"Faber\" -> Authcrypt \"Transcript\" Credential for Alice")
     authcrypted_transcript_cred_json = await crypto.auth_crypt(faber_wallet, faber_alice_key, alice_faber_verkey,
@@ -308,7 +312,7 @@ async def run():
     logger.info("4.2.0 == Apply for the job with Acme - Transcript proving ==")
     logger.info("------------------------------")
 
-    logger.info("4.2.1 \"Acme\" -> Create \"Job-Application\" Proof Request")
+    logger.info("4.2.1 \"Acme\" -> Create \"Job Application\" Proof Request")
     job_application_proof_request_json = json.dumps({
         'nonce': '1432422343242122312411212',
         'name': 'Job-Application',
@@ -345,23 +349,23 @@ async def run():
             }
         }
     })
+    print("Created Job Application Proof Request: " + job_application_proof_request_json)
 
     logger.info("4.2.2 \"Acme\" -> Get key for Alice did")
     alice_acme_verkey = await did.key_for_did(pool_handle, acme_wallet, acme_alice_connection_response['did'])
 
-    logger.info("4.2.3 \"Acme\" -> Authcrypt \"Job-Application\" Proof Request for Alice")
+    logger.info("4.2.3 \"Acme\" -> Authcrypt \"Job Application\" Proof Request for Alice")
     authcrypted_job_application_proof_request_json = \
         await crypto.auth_crypt(acme_wallet, acme_alice_key, alice_acme_verkey,
                                 job_application_proof_request_json.encode('utf-8'))
 
-    logger.info("4.2.4 \"Acme\" -> Send authcrypted \"Job-Application\" Proof Request to Alice (simulated)")
+    logger.info("4.2.4 \"Acme\" -> Send authcrypted \"Job Application\" Proof Request to Alice (simulated)")
 
-    logger.info("4.2.5 \"Alice\" -> Authdecrypt \"Job-Application\" Proof Request from Acme")
+    logger.info("4.2.5 \"Alice\" -> Authdecrypt \"Job Application\" Proof Request from Acme")
     acme_alice_verkey, authdecrypted_job_application_proof_request_json, _ = \
         await auth_decrypt(alice_wallet, alice_acme_key, authcrypted_job_application_proof_request_json)
 
-    logger.info("4.2.6 \"Alice\" -> Get credentials for \"Job-Application\" Proof Request")
-
+    logger.info("4.2.6 \"Alice\" -> Get credentials for \"Job Application\" Proof Request")
     search_for_job_application_proof_request = \
         await anoncreds.prover_search_credentials_for_proof_req(alice_wallet,
                                                                 authdecrypted_job_application_proof_request_json, None)
@@ -386,7 +390,7 @@ async def run():
     schemas_json, cred_defs_json, revoc_states_json = \
         await prover_get_entities_from_ledger("4.2", pool_handle, alice_faber_did, creds_for_job_application_proof, 'Alice')
 
-    logger.info("4.2.9 \"Alice\" -> Create \"Job-Application\" Proof")
+    logger.info("4.2.9 \"Alice\" -> Create \"Job Application\" Proof")
     job_application_requested_creds_json = json.dumps({
         'self_attested_attributes': {
             'attr1_referent': 'Alice',
@@ -400,19 +404,21 @@ async def run():
         },
         'requested_predicates': {'predicate1_referent': {'cred_id': cred_for_predicate1['referent']}}
     })
+    print("Created Job Application Requested Credentials: " + job_application_requested_creds_json)
 
     job_application_proof_json = \
         await anoncreds.prover_create_proof(alice_wallet, authdecrypted_job_application_proof_request_json,
                                             job_application_requested_creds_json, alice_master_secret_id,
                                             schemas_json, cred_defs_json, revoc_states_json)
+    print("Created Job Application Proof: " + job_application_proof_json)
 
-    logger.info("4.2.10 \"Alice\" -> Authcrypt \"Job-Application\" Proof for Acme")
+    logger.info("4.2.10 \"Alice\" -> Authcrypt \"Job Application\" Proof for Acme")
     authcrypted_job_application_proof_json = await crypto.auth_crypt(alice_wallet, alice_acme_key, acme_alice_verkey,
                                                                      job_application_proof_json.encode('utf-8'))
 
-    logger.info("4.2.11 \"Alice\" -> Send authcrypted \"Job-Application\" Proof to Acme (simulated)")
+    logger.info("4.2.11 \"Alice\" -> Send authcrypted \"Job Application\" Proof to Acme (simulated)")
 
-    logger.info("4.2.12 \"Acme\" -> Authdecrypted \"Job-Application\" Proof from Alice")
+    logger.info("4.2.12 \"Acme\" -> Authdecrypted \"Job Application\" Proof from Alice")
     _, decrypted_job_application_proof_json, decrypted_job_application_proof = \
         await auth_decrypt(acme_wallet, acme_alice_key, authcrypted_job_application_proof_json)
 
@@ -420,7 +426,7 @@ async def run():
         await verifier_get_entities_from_ledger("4.2", pool_handle, acme_did,
                                                 decrypted_job_application_proof['identifiers'], 'Acme')
 
-    logger.info("4.2.15 \"Acme\" -> Verify \"Job-Application\" Proof from Alice")
+    logger.info("4.2.15 \"Acme\" -> Verify \"Job Application\" Proof from Alice")
     assert 'Bachelor of Science, Marketing' == \
            decrypted_job_application_proof['requested_proof']['revealed_attrs']['attr3_referent']['raw']
     assert 'graduated' == \
@@ -443,6 +449,7 @@ async def run():
     logger.info("4.3.1 \"Acme\" -> Create \"Job Certificate\" Credential Offer for Alice")
     job_certificate_cred_offer_json = \
         await anoncreds.issuer_create_credential_offer(acme_wallet, acme_job_certificate_cred_def_id)
+    print("Created Job Certificate Credential Offer: " + job_certificate_cred_offer_json)
 
     logger.info("4.2.2 \"Acme\" -> Get key for Alice did")
     alice_acme_verkey = await did.key_for_did(pool_handle, acme_wallet, acme_alice_connection_response['did'])
@@ -466,6 +473,8 @@ async def run():
         await anoncreds.prover_create_credential_req(alice_wallet, alice_acme_did,
                                                      authdecrypted_job_certificate_cred_offer_json,
                                                      acme_job_certificate_cred_def, alice_master_secret_id)
+    print("Created Job Certificate Credential Request: " + job_certificate_cred_request_json)
+    print("Created Job Certificate Credential Request Metadata: " + job_certificate_cred_request_metadata_json)
 
     logger.info("4.3.8 \"Alice\" -> Authcrypt \"Job Certificate\" Credential Request for Acme")
     authcrypted_job_certificate_cred_request_json = \
@@ -523,7 +532,7 @@ async def run():
     logger.info("5.2.0 == Apply for the loan with Thrift - Job Certificate proving  ==")
     logger.info("------------------------------")
 
-    logger.info("5.2.1 \"Thrift\" -> Create \"Loan-Application-Basic\" Proof Request")
+    logger.info("5.2.1 \"Thrift\" -> Create \"Loan Application-Basic\" Proof Request")
     apply_loan_proof_request_json = json.dumps({
         'nonce': '123432421212',
         'name': 'Loan-Application-Basic',
@@ -553,18 +562,18 @@ async def run():
     logger.info("5.2.2 \"Thrift\" -> Get key for Alice did")
     alice_thrift_verkey = await did.key_for_did(pool_handle, thrift_wallet, thrift_alice_connection_response['did'])
 
-    logger.info("5.2.3 \"Thrift\" -> Authcrypt \"Loan-Application-Basic\" Proof Request for Alice")
+    logger.info("5.2.3 \"Thrift\" -> Authcrypt \"Loan Application-Basic\" Proof Request for Alice")
     authcrypted_apply_loan_proof_request_json = \
         await crypto.auth_crypt(thrift_wallet, thrift_alice_key, alice_thrift_verkey,
                                 apply_loan_proof_request_json.encode('utf-8'))
 
-    logger.info("5.2.4 \"Thrift\" -> Send authcrypted \"Loan-Application-Basic\" Proof Request to Alice (simulated)")
+    logger.info("5.2.4 \"Thrift\" -> Send authcrypted \"Loan Application-Basic\" Proof Request to Alice (simulated)")
 
-    logger.info("5.2.5 \"Alice\" -> Authdecrypt \"Loan-Application-Basic\" Proof Request from Thrift")
+    logger.info("5.2.5 \"Alice\" -> Authdecrypt \"Loan Application-Basic\" Proof Request from Thrift")
     thrift_alice_verkey, authdecrypted_apply_loan_proof_request_json, _ = \
         await auth_decrypt(alice_wallet, alice_thrift_key, authcrypted_apply_loan_proof_request_json)
 
-    logger.info("5.2.6 \"Alice\" -> Get credentials for \"Loan-Application-Basic\" Proof Request")
+    logger.info("5.2.6 \"Alice\" -> Get credentials for \"Loan Application-Basic\" Proof Request")
 
     search_for_apply_loan_proof_request = \
         await anoncreds.prover_search_credentials_for_proof_req(alice_wallet,
@@ -583,7 +592,7 @@ async def run():
     schemas_json, cred_defs_json, revoc_states_json = \
         await prover_get_entities_from_ledger("5.2", pool_handle, alice_thrift_did, creds_for_apply_loan_proof, 'Alice')
 
-    logger.info("5.2.9 \"Alice\" -> Create \"Loan-Application-Basic\" Proof")
+    logger.info("5.2.9 \"Alice\" -> Create \"Loan Application-Basic\" Proof")
     apply_loan_requested_creds_json = json.dumps({
         'self_attested_attributes': {},
         'requested_attributes': {
@@ -599,14 +608,14 @@ async def run():
                                             apply_loan_requested_creds_json, alice_master_secret_id, schemas_json,
                                             cred_defs_json, revoc_states_json)
 
-    logger.info("5.2.10 \"Alice\" -> Authcrypt \"Loan-Application-Basic\" Proof for Thrift")
+    logger.info("5.2.10 \"Alice\" -> Authcrypt \"Loan Application-Basic\" Proof for Thrift")
     authcrypted_alice_apply_loan_proof_json = \
         await crypto.auth_crypt(alice_wallet, alice_thrift_key, thrift_alice_verkey,
                                 alice_apply_loan_proof_json.encode('utf-8'))
 
-    logger.info("5.2.11 \"Alice\" -> Send authcrypted \"Loan-Application-Basic\" Proof to Thrift (simulated)")
+    logger.info("5.2.11 \"Alice\" -> Send authcrypted \"Loan Application-Basic\" Proof to Thrift (simulated)")
 
-    logger.info("5.2.12 \"Thrift\" -> Authdecrypted \"Loan-Application-Basic\" Proof from Alice")
+    logger.info("5.2.12 \"Thrift\" -> Authdecrypted \"Loan Application-Basic\" Proof from Alice")
     _, authdecrypted_alice_apply_loan_proof_json, authdecrypted_alice_apply_loan_proof = \
         await auth_decrypt(thrift_wallet, thrift_alice_key, authcrypted_alice_apply_loan_proof_json)
 
@@ -616,7 +625,7 @@ async def run():
         await verifier_get_entities_from_ledger("5.2", pool_handle, thrift_did,
                                                 authdecrypted_alice_apply_loan_proof['identifiers'], 'Thrift')
 
-    logger.info("5.2.16 \"Thrift\" -> Verify \"Loan-Application-Basic\" Proof from Alice")
+    logger.info("5.2.16 \"Thrift\" -> Verify \"Loan Application-Basic\" Proof from Alice")
     assert 'Permanent' == \
            authdecrypted_alice_apply_loan_proof['requested_proof']['revealed_attrs']['attr1_referent']['raw']
 
@@ -628,7 +637,7 @@ async def run():
     logger.info("5.3.0 == Apply for the loan with Thrift - Transcript and Job Certificate proving  ==")
     logger.info("------------------------------")
 
-    logger.info("5.3.1 \"Thrift\" -> Create \"Loan-Application-KYC\" Proof Request")
+    logger.info("5.3.1 \"Thrift\" -> Create \"Loan Application-KYC\" Proof Request")
     apply_loan_kyc_proof_request_json = json.dumps({
         'nonce': '123432421212',
         'name': 'Loan-Application-KYC',
@@ -644,18 +653,18 @@ async def run():
     logger.info("5.2.2 \"Thrift\" -> Get key for Alice did")
     alice_thrift_verkey = await did.key_for_did(pool_handle, thrift_wallet, thrift_alice_connection_response['did'])
 
-    logger.info("5.3.3 \"Thrift\" -> Authcrypt \"Loan-Application-KYC\" Proof Request for Alice")
+    logger.info("5.3.3 \"Thrift\" -> Authcrypt \"Loan Application-KYC\" Proof Request for Alice")
     authcrypted_apply_loan_kyc_proof_request_json = \
         await crypto.auth_crypt(thrift_wallet, thrift_alice_key, alice_thrift_verkey,
                                 apply_loan_kyc_proof_request_json.encode('utf-8'))
 
-    logger.info("5.3.4 \"Thrift\" -> Send authcrypted \"Loan-Application-KYC\" Proof Request to Alice (simulated)")
+    logger.info("5.3.4 \"Thrift\" -> Send authcrypted \"Loan Application-KYC\" Proof Request to Alice (simulated)")
 
-    logger.info("5.3.5 \"Alice\" -> Authdecrypt \"Loan-Application-KYC\" Proof Request from Thrift")
+    logger.info("5.3.5 \"Alice\" -> Authdecrypt \"Loan Application-KYC\" Proof Request from Thrift")
     thrift_alice_verkey, authdecrypted_apply_loan_kyc_proof_request_json, _ = \
         await auth_decrypt(alice_wallet, alice_thrift_key, authcrypted_apply_loan_kyc_proof_request_json)
 
-    logger.info("5.3.6 \"Alice\" -> Get credentials for \"Loan-Application-KYC\" Proof Request")
+    logger.info("5.3.6 \"Alice\" -> Get credentials for \"Loan Application-KYC\" Proof Request")
 
     search_for_apply_loan_kyc_proof_request = \
         await anoncreds.prover_search_credentials_for_proof_req(alice_wallet,
@@ -674,7 +683,7 @@ async def run():
     schemas_json, cred_defs_json, revoc_states_json = \
         await prover_get_entities_from_ledger("5.3", pool_handle, alice_thrift_did, creds_for_apply_loan_kyc_proof, 'Alice')
 
-    logger.info("5.3.9 \"Alice\" -> Create \"Loan-Application-KYC\" Proof")
+    logger.info("5.3.9 \"Alice\" -> Create \"Loan Application-KYC\" Proof")
 
     apply_loan_kyc_requested_creds_json = json.dumps({
         'self_attested_attributes': {},
@@ -691,14 +700,14 @@ async def run():
                                             apply_loan_kyc_requested_creds_json, alice_master_secret_id,
                                             schemas_json, cred_defs_json, revoc_states_json)
 
-    logger.info("5.3.10 \"Alice\" -> Authcrypt \"Loan-Application-KYC\" Proof for Thrift")
+    logger.info("5.3.10 \"Alice\" -> Authcrypt \"Loan Application-KYC\" Proof for Thrift")
     authcrypted_alice_apply_loan_kyc_proof_json = \
         await crypto.auth_crypt(alice_wallet, alice_thrift_key, thrift_alice_verkey,
                                 alice_apply_loan_kyc_proof_json.encode('utf-8'))
 
-    logger.info("5.3.11 \"Alice\" -> Send authcrypted \"Loan-Application-KYC\" Proof to Thrift (simulated)")
+    logger.info("5.3.11 \"Alice\" -> Send authcrypted \"Loan Application-KYC\" Proof to Thrift (simulated)")
 
-    logger.info("5.3.12 \"Thrift\" -> Authdecrypted \"Loan-Application-KYC\" Proof from Alice")
+    logger.info("5.3.12 \"Thrift\" -> Authdecrypted \"Loan Application-KYC\" Proof from Alice")
     _, authdecrypted_alice_apply_loan_kyc_proof_json, authdecrypted_alice_apply_loan_kyc_proof = \
         await auth_decrypt(thrift_wallet, thrift_alice_key, authcrypted_alice_apply_loan_kyc_proof_json)
 
@@ -708,7 +717,7 @@ async def run():
         await verifier_get_entities_from_ledger("5.3", pool_handle, thrift_did,
                                                 authdecrypted_alice_apply_loan_kyc_proof['identifiers'], 'Thrift')
 
-    logger.info("5.3.16 \"Thrift\" -> Verify \"Loan-Application-KYC\" Proof from Alice")
+    logger.info("5.3.16 \"Thrift\" -> Verify \"Loan Application-KYC\" Proof from Alice")
     assert 'Alice' == \
            authdecrypted_alice_apply_loan_kyc_proof['requested_proof']['revealed_attrs']['attr1_referent']['raw']
     assert 'Garcia' == \
