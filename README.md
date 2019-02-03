@@ -69,12 +69,19 @@ git clone https://github.com/kdenhartog/indy-dev.git
 cd indy-dev
 docker build -f indy-pool.dockerfile -t indy_pool .
 docker build -f indy-dev.dockerfile -t indy_dev .
+
 docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
 docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev indy_dev
 ```
 NOTE: The construction `C:/INDY/indy-dev:/indy-dev` is necessary under Windows 10 because if the `:/indy-dev` alias is missing, you end up with an unusable shared folder called `C:/INDY/indy-dev` in your Linux session.
 
 REFERENCE:  https://forums.docker.com/t/volume-mounts-in-windows-does-not-work/10693/7
+
+To reset the environment, simply re-run these two commands:
+```
+docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
+docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev indy_dev
+```
 
 ## Test Python environment
 Once inside the docker shell (started in step 2 of "how to start"),
