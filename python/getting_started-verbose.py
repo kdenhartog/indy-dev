@@ -780,18 +780,18 @@ async def run():
 
 async def create_and_store_my_valid_did(_wallet, did_info):
     (idstring, key) = await did.create_and_store_my_did(_wallet, did_info)
-    valid_did = await idstring_to_did(idstring)
+    valid_did = await idstring_to_valid_did(idstring)
     return valid_did, key
 
 
 async def key_for_valid_did(pool_handle, _wallet, _did):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     verkey = await did.key_for_did(pool_handle, _wallet, _idstring)
     return verkey
 
 
 async def issuer_create_schema_with_valid_did(_did, schema_name, schema_version, attr_names_json):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     (schema_id, _schema) = \
         await anoncreds.issuer_create_schema(_idstring, schema_name, schema_version, 
                                              attr_names_json)
@@ -799,7 +799,7 @@ async def issuer_create_schema_with_valid_did(_did, schema_name, schema_version,
 
 
 async def issuer_create_and_store_credential_def_with_valid_did(_wallet, _did, _schema, data1, data2, data3):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     (cred_def_id, cred_def_json) = \
         await anoncreds.issuer_create_and_store_credential_def(_wallet, _idstring, _schema,
                                                                data1, data2, data3)
@@ -807,7 +807,7 @@ async def issuer_create_and_store_credential_def_with_valid_did(_wallet, _did, _
 
 
 async def prover_create_credential_req_with_valid_did(_wallet, _did, authdecrypted_cred_offer_json, cred_def, master_secret_id):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     (cred_request_json, cred_request_metadata_json) = \
         await anoncreds.prover_create_credential_req(_wallet, _idstring,
                                                      authdecrypted_cred_offer_json,
@@ -815,12 +815,12 @@ async def prover_create_credential_req_with_valid_did(_wallet, _did, authdecrypt
     return cred_request_json, cred_request_metadata_json
 
 
-async def idstring_to_did(idstring):
+async def idstring_to_valid_did(idstring):
     valid_did = "did:mymethod:" + idstring
     return valid_did
 
 
-async def did_to_idstring(valid_did):
+async def valid_did_to_idstring(valid_did):
     idstring = valid_did.replace("did:mymethod:", "")
     return idstring
 
@@ -927,29 +927,29 @@ async def get_verinym(info_prefix, pool_handle, _from, from_wallet, from_did, fr
 
 
 async def send_nym(pool_handle, wallet_handle, _did, new_did, new_key, role):
-    _idstring = await did_to_idstring(_did)
-    new_idstring = await did_to_idstring(new_did)
+    _idstring = await valid_did_to_idstring(_did)
+    new_idstring = await valid_did_to_idstring(new_did)
     nym_request = await ledger.build_nym_request(_idstring, new_idstring, new_key, None, role)
     print("SEND_NYM: " + nym_request)
     await ledger.sign_and_submit_request(pool_handle, wallet_handle, _idstring, nym_request)
 
 
 async def send_schema(pool_handle, wallet_handle, _did, schema):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     schema_request = await ledger.build_schema_request(_idstring, schema)
     print("SEND_SCHEMA: " + schema_request)
     await ledger.sign_and_submit_request(pool_handle, wallet_handle, _idstring, schema_request)
 
 
 async def send_cred_def(pool_handle, wallet_handle, _did, cred_def_json):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     cred_def_request = await ledger.build_cred_def_request(_idstring, cred_def_json)
     print("SEND_CRED_DEF: " + cred_def_request)
     await ledger.sign_and_submit_request(pool_handle, wallet_handle, _idstring, cred_def_request)
 
 
 async def get_schema(pool_handle, _did, schema_id):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     get_schema_request = await ledger.build_get_schema_request(_idstring, schema_id)
     print("GET_SCHEMA_REQ:  " + get_schema_request)
     get_schema_response = await ledger.submit_request(pool_handle, get_schema_request)
@@ -958,7 +958,7 @@ async def get_schema(pool_handle, _did, schema_id):
 
 
 async def get_cred_def(pool_handle, _did, schema_id):
-    _idstring = await did_to_idstring(_did)
+    _idstring = await valid_did_to_idstring(_did)
     get_cred_def_request = await ledger.build_get_cred_def_request(_idstring, schema_id)
     print("GET_CRED_DEF_REQ:  " + get_cred_def_request)
     get_cred_def_response = await ledger.submit_request(pool_handle, get_cred_def_request)
@@ -974,7 +974,7 @@ async def get_credential_for_referent(search_handle, referent):
 
 
 async def prover_get_entities_from_ledger(info_prefix, pool_handle, _did, identifiers, actor):
-    _idstring = await did_to_idstring(_did)    
+    _idstring = await valid_did_to_idstring(_did)    
     schemas = {}
     cred_defs = {}
     rev_states = {}
@@ -994,7 +994,7 @@ async def prover_get_entities_from_ledger(info_prefix, pool_handle, _did, identi
 
 
 async def verifier_get_entities_from_ledger(info_prefix, pool_handle, _did, identifiers, actor):
-    _idstring = await did_to_idstring(_did)  
+    _idstring = await valid_did_to_idstring(_did)  
     schemas = {}
     cred_defs = {}
     rev_reg_defs = {}
