@@ -192,8 +192,8 @@ async def run():
     logger.info("2.4.1 \"Acme\" -> Get from Ledger \"Job Certificate\" Schema")
     (_, job_certificate_schema) = await get_schema(pool_handle, acme_did, job_certificate_schema_id)
     print("Get Job Certificate Schema using Acme DID: " + acme_did)
-    print("Get Job Certificate Schema ID: " + job_certificate_schema_id)
-    print("Get Job Certificate Schema: " + job_certificate_schema)
+    print("Certificate Schema ID: " + job_certificate_schema_id)
+    print("Certificate Schema: " + job_certificate_schema)
 
     logger.info("2.4.2 \"Acme\" -> Create and store in Wallet \"Acme Job Certificate\" Credential Definition")
     (acme_job_certificate_cred_def_id, acme_job_certificate_cred_def_json) = \
@@ -251,16 +251,16 @@ async def run():
     logger.info("3.2.7 \"Alice\" -> Get \"Faber Transcript\" Credential Definition from Ledger")
     (faber_transcript_cred_def_id, faber_transcript_cred_def) = \
         await get_cred_def(pool_handle, alice_faber_did, authdecrypted_transcript_cred_offer['cred_def_id'])
-    print("Get Transcript Credential Definition ID: " + faber_transcript_cred_def_id)
-    print("Get Transcript Credential Definition: " + faber_transcript_cred_def)
+    print("Transcript Credential Definition ID: " + faber_transcript_cred_def_id)
+    print("Transcript Credential Definition: " + faber_transcript_cred_def)
 
     logger.info("3.2.8 \"Alice\" -> Create \"Transcript\" Credential Request for Faber")
     (transcript_cred_request_json, transcript_cred_request_metadata_json) = \
         await prover_create_credential_req_with_valid_did(alice_wallet, alice_faber_did,
                                                      authdecrypted_transcript_cred_offer_json,
                                                      faber_transcript_cred_def, alice_master_secret_id)
-    print("Created Transcript Credential Request: " + transcript_cred_request_json)
-    print("Created Transcript Credential Request Metadata: " + transcript_cred_request_metadata_json)
+    print("Transcript Credential Request: " + transcript_cred_request_json)
+    print("Transcript Credential Request Metadata: " + transcript_cred_request_metadata_json)
 
     logger.info("3.2.9 \"Alice\" -> Authcrypt \"Transcript\" Credential Request for Faber")
     authcrypted_transcript_cred_request = await crypto.auth_crypt(alice_wallet, alice_faber_key, faber_alice_verkey,
@@ -953,7 +953,7 @@ async def get_schema(pool_handle, _did, schema_id):
     get_schema_request = await ledger.build_get_schema_request(_idstring, schema_id)
     print("GET_SCHEMA_REQ:  " + get_schema_request)
     get_schema_response = await ledger.submit_request(pool_handle, get_schema_request)
-    print("GET_SCHEMA-RESP: " + get_schema_response)
+    print("GET_SCHEMA_RESP: " + get_schema_response)
     return await ledger.parse_get_schema_response(get_schema_response)
 
 
