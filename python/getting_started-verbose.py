@@ -354,12 +354,12 @@ async def run():
             }
         }
     })
-    print("Created Job Application Proof Request: " + job_application_proof_request_json)
+    print("Job Application Proof Request: " + job_application_proof_request_json)
 
     logger.info("4.2.2 \"Acme\" -> Get Verkey for Alice DID")
     alice_acme_verkey = await key_for_valid_did(pool_handle, acme_wallet, acme_alice_connection_response['did'])
-    print("Get Verkey for DID (acme_alice_connection_response):" + acme_alice_connection_response['did'])
-    print("Get Verkey (alice_acme_verkey):" + alice_acme_verkey)
+    print("Verkey for DID (acme_alice_connection_response):" + acme_alice_connection_response['did'])
+    print("Verkey (alice_acme_verkey):" + alice_acme_verkey)
 
     logger.info("4.2.3 \"Acme\" -> Authcrypt \"Job Application\" Proof Request for Alice")
     authcrypted_job_application_proof_request_json = \
@@ -411,12 +411,12 @@ async def run():
         },
         'requested_predicates': {'predicate1_referent': {'cred_id': cred_for_predicate1['referent']}}
     })
-    print("Created Job Application Requested Credentials: " + job_application_requested_creds_json)
+    print("Job Application Requested Credentials: " + job_application_requested_creds_json)
     job_application_proof_json = \
         await anoncreds.prover_create_proof(alice_wallet, authdecrypted_job_application_proof_request_json,
                                             job_application_requested_creds_json, alice_master_secret_id,
                                             schemas_json, cred_defs_json, revoc_states_json)
-    print("Created Job Application Proof: " + job_application_proof_json)
+    print("Job Application Proof: " + job_application_proof_json)
 
     logger.info("4.2.10 \"Alice\" -> Authcrypt \"Job Application\" Proof for Acme")
     authcrypted_job_application_proof_json = await crypto.auth_crypt(alice_wallet, alice_acme_key, acme_alice_verkey,
@@ -456,12 +456,12 @@ async def run():
     logger.info("4.3.1 \"Acme\" -> Create \"Job Certificate\" Credential Offer for Alice")
     job_certificate_cred_offer_json = \
         await anoncreds.issuer_create_credential_offer(acme_wallet, acme_job_certificate_cred_def_id)
-    print("Created Job Certificate Credential Offer: " + job_certificate_cred_offer_json)
+    print("Job Certificate Credential Offer: " + job_certificate_cred_offer_json)
 
-    logger.info("4.2.2 \"Acme\" -> Get Verkey for Alice DID")
+    logger.info("4.3.2 \"Acme\" -> Get Verkey for Alice DID")
     alice_acme_verkey = await key_for_valid_did(pool_handle, acme_wallet, acme_alice_connection_response['did'])
-    print("Get Verkey for DID (acme_alice_connection_response):" + acme_alice_connection_response['did'])
-    print("Get Verkey (alice_acme_verkey):" + alice_acme_verkey)
+    print("Verkey for DID (acme_alice_connection_response):" + acme_alice_connection_response['did'])
+    print("Verkey (alice_acme_verkey):" + alice_acme_verkey)
 
     logger.info("4.3.3 \"Acme\" -> Authcrypt \"Job Certificate\" Credential Offer for Alice")
     authcrypted_job_certificate_cred_offer = await crypto.auth_crypt(acme_wallet, acme_alice_key, alice_acme_verkey,
@@ -476,15 +476,15 @@ async def run():
     logger.info("4.3.6 \"Alice\" -> Get \"Acme Job Certificate\" Credential Definition from Ledger")
     (_, acme_job_certificate_cred_def) = \
         await get_cred_def(pool_handle, alice_acme_did, authdecrypted_job_certificate_cred_offer['cred_def_id'])
-    print("Get Job Certificate Credential Definition: " + acme_job_certificate_cred_def)
+    print("Job Certificate Credential Definition: " + acme_job_certificate_cred_def)
 
     logger.info("4.3.7 \"Alice\" -> Create and store in Wallet \"Job Certificate\" Credential Request for Acme")
     (job_certificate_cred_request_json, job_certificate_cred_request_metadata_json) = \
         await prover_create_credential_req_with_valid_did(alice_wallet, alice_acme_did,
                                                      authdecrypted_job_certificate_cred_offer_json,
                                                      acme_job_certificate_cred_def, alice_master_secret_id)
-    print("Created Job Certificate Credential Request: " + job_certificate_cred_request_json)
-    print("Created Job Certificate Credential Request Metadata: " + job_certificate_cred_request_metadata_json)
+    print("Job Certificate Credential Request: " + job_certificate_cred_request_json)
+    print("Job Certificate Credential Request Metadata: " + job_certificate_cred_request_metadata_json)
 
     logger.info("4.3.8 \"Alice\" -> Authcrypt \"Job Certificate\" Credential Request for Acme")
     authcrypted_job_certificate_cred_request_json = \
@@ -505,12 +505,12 @@ async def run():
         "salary": {"raw": "2400", "encoded": "2400"},
         "experience": {"raw": "10", "encoded": "10"}
     })
-    print("Created Job Certificate Credential Values: " + alice_job_certificate_cred_values_json)
+    print("Job Certificate Credential Values: " + alice_job_certificate_cred_values_json)
     job_certificate_cred_json, _, _ = \
         await anoncreds.issuer_create_credential(acme_wallet, job_certificate_cred_offer_json,
                                                  authdecrypted_job_certificate_cred_request_json,
                                                  alice_job_certificate_cred_values_json, None, None)
-    print("Created Job Certificate Credential: " + job_certificate_cred_json)
+    print("Job Certificate Credential: " + job_certificate_cred_json)
 
     logger.info("4.3.12 \"Acme\" -> Authcrypt \"Job Certificate\" Credential for Alice")
     authcrypted_job_certificate_cred_json = \
@@ -572,8 +572,8 @@ async def run():
 
     logger.info("5.2.2 \"Thrift\" -> Get Verkey for Alice DID")
     alice_thrift_verkey = await key_for_valid_did(pool_handle, thrift_wallet, thrift_alice_connection_response['did'])
-    print("Get Verkey for DID (thrift_alice_connection_response):" + thrift_alice_connection_response['did'])
-    print("Get Verkey (alice_thrift_verkey):" + alice_thrift_verkey)
+    print("Verkey for DID (thrift_alice_connection_response):" + thrift_alice_connection_response['did'])
+    print("Verkey (alice_thrift_verkey):" + alice_thrift_verkey)
 
     logger.info("5.2.3 \"Thrift\" -> Authcrypt \"Loan Application-Basic\" Proof Request for Alice")
     authcrypted_apply_loan_proof_request_json = \
@@ -590,7 +590,7 @@ async def run():
     search_for_apply_loan_proof_request = \
         await anoncreds.prover_search_credentials_for_proof_req(alice_wallet,
                                                                 authdecrypted_apply_loan_proof_request_json, None)
-    print("Get Loan Application-Basic Proof Request: " + apply_loan_proof_request_json)
+    print("Loan Application-Basic Proof Request: " + apply_loan_proof_request_json)
 
     cred_for_attr1 = await get_credential_for_referent(search_for_apply_loan_proof_request, 'attr1_referent')
     cred_for_predicate1 = await get_credential_for_referent(search_for_apply_loan_proof_request, 'predicate1_referent')
@@ -621,7 +621,7 @@ async def run():
         await anoncreds.prover_create_proof(alice_wallet, authdecrypted_apply_loan_proof_request_json,
                                             apply_loan_requested_creds_json, alice_master_secret_id, schemas_json,
                                             cred_defs_json, revoc_states_json)
-    print("Created Loan Application-Basic Proof: " + alice_apply_loan_proof_json)
+    print("Loan Application-Basic Proof: " + alice_apply_loan_proof_json)
 
     logger.info("5.2.10 \"Alice\" -> Authcrypt \"Loan Application-Basic\" Proof for Thrift")
     authcrypted_alice_apply_loan_proof_json = \
