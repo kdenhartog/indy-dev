@@ -1,0 +1,1 @@
+5.3.1 Loan Application-KYC Proof Request: {"requested_attributes": {"attr1_referent": {"name": "first_name"}, "attr3_referent": {"name": "ssn"}, "attr2_referent": {"name": "last_name"}}, "requested_predicates": {}, "name": "Loan-Application-KYC", "version": "0.1", "nonce": "123432421212"}

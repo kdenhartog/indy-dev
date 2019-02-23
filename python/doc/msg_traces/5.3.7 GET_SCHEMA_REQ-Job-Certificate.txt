@@ -1,0 +1,1 @@
+5.3.7 GET_SCHEMA_REQ-Job-Certificate:  {"reqId":1548995642276619800,"identifier":"A12UxLhMVUMvkYEF6h7oXn","operation":{"type":"107","dest":"G8kZXsNRZZaARbMS6BQkWo","data":{"name":"Job-Certificate","version":"0.2"}},"protocolVersion":2}

@@ -1,0 +1,1 @@
+5.1.2 SEND_NYM: {"reqId":1548995637327094700,"identifier":"4nhFNcZyRqo4TCzvftJ6xA","operation":{"dest":"SqHfo7WFY4tEpr2LDjdikb","type":"1","verkey":"F5cpTa5MFXSZbFc6pwQBR5tDDokA7LT5km9aex648QER"},"protocolVersion":2}

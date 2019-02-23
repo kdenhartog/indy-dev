@@ -1,0 +1,1 @@
+5.1.3 Connection Request: {"did": "did:mymethod:SqHfo7WFY4tEpr2LDjdikb", "nonce": 123456789}

@@ -1,0 +1,1 @@
+5.3.8 GET_CRED_DEF_REQ-Job-Certificate:  {"reqId":1548995642365068600,"identifier":"A12UxLhMVUMvkYEF6h7oXn","operation":{"type":"108","ref":45,"signature_type":"CL","origin":"CT5Tj8ppe76YJftQZGYkFU","tag":"TAG1"},"protocolVersion":2}

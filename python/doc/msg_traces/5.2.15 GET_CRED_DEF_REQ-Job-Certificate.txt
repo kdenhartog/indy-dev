@@ -1,0 +1,1 @@
+5.2.15 GET_CRED_DEF_REQ:  {"reqId":1548995641380539600,"identifier":"4nhFNcZyRqo4TCzvftJ6xA","operation":{"type":"108","ref":45,"signature_type":"CL","origin":"CT5Tj8ppe76YJftQZGYkFU","tag":"TAG1"},"protocolVersion":2}

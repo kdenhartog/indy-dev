@@ -1,0 +1,1 @@
+5.3.14 GET_SCHEMA_REQ-Transcript:  {"reqId":1548995643431541400,"identifier":"4nhFNcZyRqo4TCzvftJ6xA","operation":{"type":"107","dest":"G8kZXsNRZZaARbMS6BQkWo","data":{"name":"Transcript","version":"1.2"}},"protocolVersion":2}

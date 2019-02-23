@@ -143,7 +143,7 @@ async def run():
     (job_certificate_schema_id, job_certificate_schema) = \
         await issuer_create_schema_with_valid_did(government_did, 'Job-Certificate', '0.2',
                                              json.dumps(['first_name', 'last_name', 'salary', 'employee_status', 'experience']))
-    print("Created Job Certificate Schema using Government DID: " + government_did)
+    print("Job Certificate Schema using Government DID: " + government_did)
     print("Job Certificate Schema ID: " + job_certificate_schema_id)
     print("Job Certificate Schema: " + job_certificate_schema)
 
@@ -155,7 +155,7 @@ async def run():
         await issuer_create_schema_with_valid_did(government_did, 'Transcript', '1.2',
                                              json.dumps(['first_name', 'last_name', 'degree', 'status',
                                                          'year', 'average', 'ssn']))
-    print("Created Transcript Schema using Government DID: " + government_did)
+    print("Transcript Schema using Government DID: " + government_did)
     print("Transcript Schema ID: " + transcript_schema_id)
     print("Transcript Schema: " + transcript_schema)
 
@@ -170,7 +170,7 @@ async def run():
 
     logger.info("2.3.1 \"Faber\" -> Get \"Transcript\" Schema from Ledger")
     (_, transcript_schema) = await get_schema(pool_handle, faber_did, transcript_schema_id)
-    print("Get Transcript Schema using Faber DID: " + faber_did)
+    print("Transcript Schema using Faber DID: " + faber_did)
     print("Transcript Schema ID: " + transcript_schema_id)
     print("Transcript Schema: " + transcript_schema)
 
@@ -178,7 +178,7 @@ async def run():
     (faber_transcript_cred_def_id, faber_transcript_cred_def_json) = \
         await issuer_create_and_store_credential_def_with_valid_did(faber_wallet, faber_did, transcript_schema,
                                                                'TAG1', 'CL', '{"support_revocation": false}')
-    print("Created Transcript Credential Definition using Faber DID: " + faber_did)
+    print("Transcript Credential Definition using Faber DID: " + faber_did)
     print("Transcript Credential Definition ID: " + faber_transcript_cred_def_id)
     print("Transcript Credential Definition: " + faber_transcript_cred_def_json)
 
@@ -191,7 +191,7 @@ async def run():
 
     logger.info("2.4.1 \"Acme\" -> Get from Ledger \"Job Certificate\" Schema")
     (_, job_certificate_schema) = await get_schema(pool_handle, acme_did, job_certificate_schema_id)
-    print("Get Job Certificate Schema using Acme DID: " + acme_did)
+    print("Job Certificate Schema using Acme DID: " + acme_did)
     print("Certificate Schema ID: " + job_certificate_schema_id)
     print("Certificate Schema: " + job_certificate_schema)
 
@@ -199,7 +199,7 @@ async def run():
     (acme_job_certificate_cred_def_id, acme_job_certificate_cred_def_json) = \
         await issuer_create_and_store_credential_def_with_valid_did(acme_wallet, acme_did, job_certificate_schema,
                                                                'TAG1', 'CL', '{"support_revocation": false}')
-    print("Created Job Certificate Credential Definition using Acme DID: " + acme_did)
+    print("Job Certificate Credential Definition using Acme DID: " + acme_did)
     print("Job Certificate Credential Definition ID: " + acme_job_certificate_cred_def_id)
     print("Job Certificate Credential Definition: " + acme_job_certificate_cred_def_json)
 
@@ -227,12 +227,12 @@ async def run():
     logger.info("3.2.1 \"Faber\" -> Create \"Transcript\" Credential Offer for Alice")
     transcript_cred_offer_json = \
         await anoncreds.issuer_create_credential_offer(faber_wallet, faber_transcript_cred_def_id)
-    print("Created Transcript Credential Offer: " + transcript_cred_offer_json)
+    print("Transcript Credential Offer: " + transcript_cred_offer_json)
 
     logger.info("3.2.2 \"Faber\" -> Get Verkey for Alice DID")
     alice_faber_verkey = await key_for_valid_did(pool_handle, acme_wallet, faber_alice_connection_response['did'])
-    print("Get Verkey for DID (faber_alice_connection_response):" + faber_alice_connection_response['did'])
-    print("Get Verkey (alice_faber_verkey):" + alice_faber_verkey)
+    print("Verkey for DID (faber_alice_connection_response):" + faber_alice_connection_response['did'])
+    print("Verkey (alice_faber_verkey):" + alice_faber_verkey)
 
     logger.info("3.2.3 \"Faber\" -> Authcrypt \"Transcript\" Credential Offer for Alice")
     authcrypted_transcript_cred_offer = await crypto.auth_crypt(faber_wallet, faber_alice_key, alice_faber_verkey,
@@ -246,7 +246,7 @@ async def run():
 
     logger.info("3.2.6 \"Alice\" -> Create and store \"Alice\" Master Secret in Wallet")
     alice_master_secret_id = await anoncreds.prover_create_master_secret(alice_wallet, None)
-    print("Created Alice Master Secret ID: " + alice_master_secret_id)
+    print("Alice Master Secret ID: " + alice_master_secret_id)
 
     logger.info("3.2.7 \"Alice\" -> Get \"Faber Transcript\" Credential Definition from Ledger")
     (faber_transcript_cred_def_id, faber_transcript_cred_def) = \
@@ -282,12 +282,12 @@ async def run():
         "year": {"raw": "2015", "encoded": "2015"},
         "average": {"raw": "5", "encoded": "5"}
     })
-    print("Created Transcript Credential Values: " + transcript_cred_values)
+    print("Transcript Credential Values: " + transcript_cred_values)
     transcript_cred_json, _, _ = \
         await anoncreds.issuer_create_credential(faber_wallet, transcript_cred_offer_json,
                                                  authdecrypted_transcript_cred_request_json,
                                                  transcript_cred_values, None, None)
-    print("Created Transcript Credential: " + transcript_cred_json)
+    print("Transcript Credential: " + transcript_cred_json)
 
     logger.info("3.2.13 \"Faber\" -> Authcrypt \"Transcript\" Credential for Alice")
     authcrypted_transcript_cred_json = await crypto.auth_crypt(faber_wallet, faber_alice_key, alice_faber_verkey,
@@ -568,7 +568,7 @@ async def run():
             }
         }
     })
-    print("Created Loan Application-Basic Proof Request: " + apply_loan_proof_request_json)
+    print("Loan Application-Basic Proof Request: " + apply_loan_proof_request_json)
 
     logger.info("5.2.2 \"Thrift\" -> Get Verkey for Alice DID")
     alice_thrift_verkey = await key_for_valid_did(pool_handle, thrift_wallet, thrift_alice_connection_response['did'])
@@ -616,7 +616,7 @@ async def run():
             'predicate2_referent': {'cred_id': cred_for_predicate2['referent']}
         }
     })
-    print("Created Loan Application-Basic Requested Credentials: " + apply_loan_requested_creds_json)
+    print("Loan Application-Basic Requested Credentials: " + apply_loan_requested_creds_json)
     alice_apply_loan_proof_json = \
         await anoncreds.prover_create_proof(alice_wallet, authdecrypted_apply_loan_proof_request_json,
                                             apply_loan_requested_creds_json, alice_master_secret_id, schemas_json,
@@ -663,12 +663,12 @@ async def run():
         },
         'requested_predicates': {}
     })
-    print("Created Loan Application-KYC Proof Request: " + apply_loan_kyc_proof_request_json)
+    print("Loan Application-KYC Proof Request: " + apply_loan_kyc_proof_request_json)
 
-    logger.info("5.2.2 \"Thrift\" -> Get Verkey for Alice DID")
+    logger.info("5.3.2 \"Thrift\" -> Get Verkey for Alice DID")
     alice_thrift_verkey = await key_for_valid_did(pool_handle, thrift_wallet, thrift_alice_connection_response['did'])
-    print("Get Verkey for DID (thrift_alice_connection_response):" + thrift_alice_connection_response['did'])
-    print("Get Verkey (alice_thrift_verkey):" + alice_thrift_verkey)
+    print("Verkey for DID (thrift_alice_connection_response):" + thrift_alice_connection_response['did'])
+    print("Verkey (alice_thrift_verkey):" + alice_thrift_verkey)
 
     logger.info("5.3.3 \"Thrift\" -> Authcrypt \"Loan Application-KYC\" Proof Request for Alice")
     authcrypted_apply_loan_kyc_proof_request_json = \
@@ -685,7 +685,7 @@ async def run():
     search_for_apply_loan_kyc_proof_request = \
         await anoncreds.prover_search_credentials_for_proof_req(alice_wallet,
                                                                 authdecrypted_apply_loan_kyc_proof_request_json, None)
-    #print("Get Loan Application-KYC Proof Request: " + search_for_apply_loan_kyc_proof_request)
+    #print("Loan Application-KYC Proof Request: " + search_for_apply_loan_kyc_proof_request)
 
     cred_for_attr1 = await get_credential_for_referent(search_for_apply_loan_kyc_proof_request, 'attr1_referent')
     cred_for_attr2 = await get_credential_for_referent(search_for_apply_loan_kyc_proof_request, 'attr2_referent')
@@ -710,12 +710,12 @@ async def run():
         },
         'requested_predicates': {}
     })
-    print("Created Loan Application-KYC Requested Credentials: " + apply_loan_kyc_requested_creds_json)
+    print("Loan Application-KYC Requested Credentials: " + apply_loan_kyc_requested_creds_json)
     alice_apply_loan_kyc_proof_json = \
         await anoncreds.prover_create_proof(alice_wallet, authdecrypted_apply_loan_kyc_proof_request_json,
                                             apply_loan_kyc_requested_creds_json, alice_master_secret_id,
                                             schemas_json, cred_defs_json, revoc_states_json)
-    print("Created Loan Application-KYC Proof: " + alice_apply_loan_kyc_proof_json)
+    print("Loan Application-KYC Proof: " + alice_apply_loan_kyc_proof_json)
 
     logger.info("5.3.10 \"Alice\" -> Authcrypt \"Loan Application-KYC\" Proof for Thrift")
     authcrypted_alice_apply_loan_kyc_proof_json = \
@@ -860,8 +860,8 @@ async def onboarding(info_prefix, pool_handle, _from, from_wallet, from_did,
 
     logger.info("{}.6 \"{}\" -> Get Verkey for DID from \"{}\" connection request".format(info_prefix, to, _from))
     from_to_verkey = await key_for_valid_did(pool_handle, to_wallet, connection_request['did'])
-    print("Get Verkey for DID (from to):" + connection_request['did'])
-    print("Get Verkey (from_to_verkey):" + from_to_verkey)
+    print("Verkey for DID (from to):" + connection_request['did'])
+    print("Verkey (from_to_verkey):" + from_to_verkey)
 
     logger.info("{}.7 \"{}\" -> Anoncrypt Connection Response for \"{}\" with \"{} {}\" DID, Verkey and Nonce"
                 .format(info_prefix, to, _from, to, _from))
@@ -915,8 +915,8 @@ async def get_verinym(info_prefix, pool_handle, _from, from_wallet, from_did, fr
 
     logger.info("{}.16 \"{}\" -> Authenticate {} by comparing Verkeys".format(info_prefix, _from, to, ))
     to_from_verkey = await key_for_valid_did(pool_handle, from_wallet, to_from_did)
-    print("Get Verkey for DID (to from):" + to_from_did)
-    print("Get Verkey (to_from_verkey):" + to_from_verkey)
+    print("Verkey for DID (to from):" + to_from_did)
+    print("Verkey (to_from_verkey):" + to_from_verkey)
     assert sender_verkey == to_from_verkey
 
     logger.info("{}.17 \"{}\" -> Send NYM to Ledger for \"{} DID\" with {} Role".format(info_prefix, _from, to, role))
