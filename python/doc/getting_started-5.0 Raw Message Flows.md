@@ -76,21 +76,22 @@ Figure 3. Message Sizes (Approximate)
 | [5.3.14&#32;GET_SCHEMA_REQ-Job-Certificate.txt](msg_traces/5.3.14&#32;GET_SCHEMA_REQ-Job-Certificate.txt) | 236|
 | [5.3.6&#32;GET_CRED_REFERENT.txt](msg_traces/5.3.6&#32;GET_CRED_REFERENT.txt) | 1227|
 | [5.3.7&#32;GET_SCHEMA_REQ-Job-Certificate.txt](msg_traces/5.3.7&#32;GET_SCHEMA_REQ-Job-Certificate.txt) | 235|
-| [5.3.7&#32;GET_SCHEMA_REQ-Transcript.txt](msg_traces/5.3.7&#32;GET_SCHEMA_REQ-Transcript.txt) | 225|
 | [5.3.7&#32;GET_SCHEMA_RESP-Job-Certificate.txt](msg_traces/5.3.7&#32;GET_SCHEMA_RESP-Job-Certificate.txt) | 2229|
+| [5.3.7&#32;GET_SCHEMA_REQ-Transcript.txt](msg_traces/5.3.7&#32;GET_SCHEMA_REQ-Transcript.txt) | 225|
 | [5.3.7&#32;GET_SCHEMA_RESP-Transcript.txt](msg_traces/5.3.7&#32;GET_SCHEMA_RESP-Transcript.txt) | 2217|
 | [5.3.8&#32;GET_CRED_DEF_REQ-Job-Certificate.txt](msg_traces/5.3.8&#32;GET_CRED_DEF_REQ-Job-Certificate.txt) | 233|
-| [5.3.8&#32;GET_CRED_DEF_REQ-Transcript.txt](msg_traces/5.3.8&#32;GET_CRED_DEF_REQ-Transcript.txt) | 228|
 | [5.3.8&#32;GET_CRED_DEF_RESP-Job-Certificate.txt](msg_traces/5.3.8&#32;GET_CRED_DEF_RESP-Job-Certificate.txt) | 16625|
+| [5.3.8&#32;GET_CRED_DEF_REQ-Transcript.txt](msg_traces/5.3.8&#32;GET_CRED_DEF_REQ-Transcript.txt) | 228|
 | [5.3.8&#32;GET_CRED_DEF_RESP-Transcript.txt](msg_traces/5.3.8&#32;GET_CRED_DEF_RESP-Transcript.txt) | 19587|
 | [5.3.9&#32;Loan&#32;Application-KYC&#32;Proof.txt](msg_traces/5.3.9&#32;Loan&#32;Application-KYC&#32;Proof.txt) | 8934|
 | [5.3.9&#32;Loan&#32;Application-KYC&#32;Requested&#32;Credentials.txt](msg_traces/5.3.9&#32;Loan&#32;Application-KYC&#32;Requested&#32;Credentials.txt) | 403|
 | [5.3.14&#32;GET_SCHEMA_REQ-Transcript.txt](msg_traces/5.3.14&#32;GET_SCHEMA_REQ-Transcript.txt) | 226|
-| [5.3.14&#32;GET_SCHEMA_RESP-Job-Certificate.txt](msg_traces/5.3.14&#32;GET_SCHEMA_RESP-Job-Certificate.txt) | 2229|
 | [5.3.14&#32;GET_SCHEMA_RESP-Transcript.txt](msg_traces/5.3.14&#32;GET_SCHEMA_RESP-Transcript.txt) | 2217|
+| [5.3.14&#32;GET_SCHEMA_REQ-Job-Certificate.txt](msg_traces/5.3.14&#32;GET_SCHEMA_REQ-Job-Certificate.txt) | 220|
+| [5.3.14&#32;GET_SCHEMA_RESP-Job-Certificate.txt](msg_traces/5.3.14&#32;GET_SCHEMA_RESP-Job-Certificate.txt) | 2229|
 | [5.3.15&#32;GET_CRED_DEF_REQ-Job-Certificate.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_REQ-Job-Certificate.txt) | 234|
-| [5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt) | 229|
 | [5.3.15&#32;GET_CRED_DEF_RESP-Job-Certificate.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_RESP-Job-Certificate.txt) | 16626|
+| [5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt) | 229|
 | [5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt) | 19588|
 
 Table 1. Message Files and Sizes (Bytes)
