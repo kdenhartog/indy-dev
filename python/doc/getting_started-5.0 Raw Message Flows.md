@@ -5,15 +5,15 @@ This is a temporary page whose goal is to quickly illustrate the number and size
 The following documents, at a high-level, Activity 5, a subset of the tasks in the _Sally buys a car" Getting Started Scenario.
 
 The message flows include all JSON messages exchanged between:
-- Any pair of the 5 agents: 
+- Any pair of the 6 agents: 
     - Sovrin Steward (SS)
     - Government (G)
     - Faber College (FC)
     - Acme Corp (AC)
     - Thrift Bank (TB)
     - Alice (A)
-- Any of the 5 agents and the interactions with their local wallet
-- Any of the 5 agents and their interactions with their local, shared replica of the Ledger
+- Any one of the agents in the interactions with their local wallet
+- Any one of the agents in their interactions with their local, shared replica of the Ledger
 
 ## High-level Task Flow
 
