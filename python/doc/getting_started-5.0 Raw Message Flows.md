@@ -27,13 +27,19 @@ Figure 1. High-Level Task Flow
 
 Figure 2a. Interaction Diagram with Message Flows: All-in (5.1, 5.2, 5.3)
 
+### 5.1 Message Flows
+
 ![Message Flow](images/Indy-SDK-Getting-Started-5.1-Interaction.png)
 
 Figure 2b. Interaction Diagram with Message Flows: 5.1
 
+### 5.2 Message Flows
+
 ![Message Flow](images/Indy-SDK-Getting-Started-5.2-Interaction.png)
 
 Figure 2c. Interaction Diagram with Message Flows: 5.2
+
+### 5.3 Message Flows
 
 ![Message Flow](images/Indy-SDK-Getting-Started-5.3-Interaction.png)
 
