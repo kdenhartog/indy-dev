@@ -1,0 +1,48 @@
+
+
+               2 Dir(s)  594,550,722,560 bytes free
+              39 File(s)        199,057 bytes
+ Directory of C:\INDY\indy-dev\python\doc\msg_traces
+ Volume in drive C is Windows
+ Volume Serial Number is 0EDF-FD28
+2019-02-25  04:40 PM                92 5.1.3 Connection Request.txt
+2019-02-25  04:40 PM               151 5.1.7 Connection Response.txt
+2019-02-25  04:40 PM               161 5.1.9 Decrypted Connection Response.txt
+2019-02-25  04:40 PM               216 5.1.2 SEND_NYM.txt
+2019-02-25  04:40 PM               217 5.1.11 SEND_NYM.txt
+2019-02-25  04:40 PM               217 5.2.8 GET_CRED_DEF_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               218 5.2.15 GET_CRED_DEF_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               219 5.2.7 GET_SCHEMA_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               220 5.2.14 GET_SCHEMA_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               225 5.3.7 GET_SCHEMA_REQ-Transcript.txt
+2019-02-25  04:40 PM               226 5.3.14 GET_SCHEMA_REQ-Transcript.txt
+2019-02-25  04:40 PM               228 5.3.8 GET_CRED_DEF_REQ-Transcript.txt
+2019-02-25  04:40 PM               229 5.3.15 GET_CRED_DEF_REQ-Transcript.txt
+2019-02-25  04:40 PM               233 5.3.8 GET_CRED_DEF_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               234 5.3.15 GET_CRED_DEF_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               235 5.3.7 GET_SCHEMA_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               236 5.3.14 GET_SCHEMA_REQ-Job-Certificate.txt
+2019-02-25  04:40 PM               289 5.3.1 Loan Application-KYC Proof Request.txt
+2019-02-25  04:40 PM               378 5.2.9 Loan Application-Basic Requested Credentials.txt
+2019-02-25  04:40 PM               403 5.3.9 Loan Application-KYC Requested Credentials.txt
+2019-02-25  04:40 PM               595 5.2.1 Loan Application-Basic Proof Request.txt
+2019-02-25  04:40 PM             1,181 5.2.6 GET_CRED_REFERENT.txt
+2019-02-25  04:40 PM             1,227 5.3.6 GET_CRED_REFERENT.txt
+2019-02-25  04:40 PM             2,120 5.2.9 Loan Application-Basic Proof.txt
+2019-02-25  04:40 PM             2,213 5.2.7 GET_SCHEMA_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM             2,214 5.2.14 GET_SCHEMA_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM             2,217 5.3.14 GET_SCHEMA_RESP-Transcript.txt
+2019-02-25  04:40 PM             2,217 5.3.7 GET_SCHEMA_RESP-Transcript.txt
+2019-02-25  04:40 PM             2,229 5.3.14 GET_SCHEMA_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM             2,229 5.3.7 GET_SCHEMA_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM             8,934 5.3.9 Loan Application-KYC Proof.txt
+2019-02-25  04:40 PM            16,607 5.2.8 GET_CRED_DEF_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM            16,610 5.2.15 GET_CRED_DEF_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM            16,625 5.3.8 GET_CRED_DEF_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM            16,626 5.3.15 GET_CRED_DEF_RESP-Job-Certificate.txt
+2019-02-25  04:40 PM            19,587 5.3.8 GET_CRED_DEF_RESP-Transcript.txt
+2019-02-25  04:40 PM            19,588 5.3.15 GET_CRED_DEF_RESP-Transcript.txt
+2019-02-25  04:47 PM            61,411 msg_sizes.png
+2019-02-25  04:51 PM    <DIR>          .
+2019-02-25  04:51 PM    <DIR>          ..
+2019-02-25  04:55 PM                 0 files.txt
