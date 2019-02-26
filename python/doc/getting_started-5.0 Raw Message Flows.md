@@ -47,9 +47,9 @@ Figure 2d. Interaction Diagram with Message Flows: 5.3
 
 ## Sample Message Sizes
 
-![Message Sizes](msg_traces/msg_sizes.png)
+![Sample Message Sizes](msg_traces/msg_sizes.png)
 
-Figure 3. Message Sizes (Approximate)
+Figure 3. Sample Message Sizes sorted by Size (Approximate)
 
 ## Sample Message Files and Sizes (Bytes)
 
@@ -93,7 +93,7 @@ Figure 3. Message Sizes (Approximate)
 | [5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_REQ-Transcript.txt) | 229|
 | [5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt](msg_traces/5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt) | 19588|
 
-Table 1. Message Files and Sizes (Bytes)
+Table 1. Sample Message Files and File Sizes (Bytes)
 
 ## Appendix A - DID Legend
 
