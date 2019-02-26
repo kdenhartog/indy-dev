@@ -23,11 +23,29 @@ Figure 1. High-Level Task Flow
 
 ## Message Flow
 
-![Message Flow](images/Indy-SDK-Getting-Started-5.0.png)
+![Message Flow](images/Indy-SDK-Getting-Started-5.0-Interaction.png)
 
-Figure 2. Interaction Diagram with Message Flows
+Figure 2a. Interaction Diagram with Message Flows: All-in (5.1, 5.2, 5.3)
 
-## Sample Messages
+![Message Flow](images/Indy-SDK-Getting-Started-5.1-Interaction.png)
+
+Figure 2b. Interaction Diagram with Message Flows: 5.1
+
+![Message Flow](images/Indy-SDK-Getting-Started-5.2-Interaction.png)
+
+Figure 2c. Interaction Diagram with Message Flows: 5.2
+
+![Message Flow](images/Indy-SDK-Getting-Started-5.3-Interaction.png)
+
+Figure 2d. Interaction Diagram with Message Flows: 5.3
+
+## Sample Message Sizes
+
+![Message Sizes](msg_traces/msg_sizes.png)
+
+Figure 3. Message Sizes (Approximate)
+
+## Sample Message Files and Sizes (Bytes)
 
 | Message File | Size (Bytes) |
 | ------------ | ------------:|
@@ -70,12 +88,6 @@ Figure 2. Interaction Diagram with Message Flows
 | [5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt](msgtraces/5.3.15&#32;GET_CRED_DEF_RESP-Transcript.txt) | 19588|
 
 Table 1. Message Files and Sizes (Bytes)
-
-### Message Sizes
-
-![Message Sizes](msg_traces/msg_sizes.png)
-
-Figure 3. Message Sizes (Approximate)
 
 ## Appendix A - DID Legend
 
