@@ -1,6 +1,6 @@
-# Indy Walkthrough
+# HyperLedger Indy Getting Started Guide for Entperprise Architects and Developers (GSG-E) 
 
-## A Developer Guide for Building Indy Clients Using Libindy
+## Table of Contents
 
 - [Indy Walkthrough](#indy-walkthrough)
     - [A Developer Guide for Building Indy Clients Using Libindy](#a-developer-guide-for-building-indy-clients-using-libindy)
@@ -25,6 +25,24 @@
 
 The original version of this document was from the 
 [Indy SDK](https://github.com/hyperledger/indy-sdk/blob/master/docs/getting-started/indy-walkthrough.md).
+
+## The Scenario: Alice Buys a Car
+
+TODO
+
+![Scenario Intro 1](images/0.0&#32;Scenario&#32;Intro&#32;1.png)
+
+TODO
+
+![Scenario Intro 2](images/0.0&#32;Scenario&#32;Intro&#32;2.png)
+
+TODO
+
+![Scenario Intro 3](images/0.0&#32;Scenario&#32;Intro&#32;3.png)
+
+TODO
+
+![Scenario Intro 14](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
 
 ## What Indy and Libindy are and Why They Matter
 
