@@ -28,23 +28,66 @@ The original version of this document was from the
 
 ## The Scenario: Alice Buys a Car
 
-TODO
+### The User Story
+
+The Alice Buys a Car user story is documented in the following 4 use cases:
+
+1. Alice wants to buy a car - a bright red Lamborghini&reg; - from Carter's Cars.
+2. To purchase the car from Carter's Cars, Alice needs to take out a loan from Thrift Bank for the entire purchase price.
+3. To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank certifying her employment, salary level, length of service, etc.
+4. To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a certified copy of her transcript from Faber College (from where she graduated with her Bachelor's degree).
+
+### Use Case Analysis
+
+#### Use Case 1. Buying a car
+
+_Alice wants to buy a car - a bright red Lamborghini&reg; - from Carter's Cars._
+
+This use case describes the actors, roles, business processes, and artifacts (state) involved in buying a car from Carter's Cars.  The following is a description of the Buying a Car business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044)).
 
 ![Scenario Intro 1](images/0.0&#32;Scenario&#32;Intro&#32;1.png)
 
-TODO
+For Alice to prove that she has the financing necessary to purchase the car, Alice needs to present her car loan credentials to Carter's Cars.
+
+![Scenario Intro 1.5](images/0.0&#32;Scenario&#32;Intro&#32;1.5.png)
+
+#### Use Case 2. Financing the car
+
+_To purchase the car from Carter's Cars, Alice needs to take out a loan from Thrift Bank for the entire purchase price._
+
+This use case describes the actors, roles, business processes, and artifacts (state) involved in financing the car through Thrift Bank. The following is a description the extends the overall process to include the Car Financing business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044)).
 
 ![Scenario Intro 2](images/0.0&#32;Scenario&#32;Intro&#32;2.png)
 
-TODO
+For Alice to qualify for the car loan, Alice needs to find a job (she is currently unemployed) and then present a job certificate certifying her employment, salary level, length of service, etc.
+
+![Scenario Intro 2.5](images/0.0&#32;Scenario&#32;Intro&#32;2.5.png)
+
+#### Use Case 3. Proof of employment
+
+_To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank certifying her employment, salary level, length of service, etc._
+
+This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice proving that she is employed and able to service the car loan. The following is a description the extends the overall process to include the Generate Proof of Employment business process.
 
 ![Scenario Intro 3](images/0.0&#32;Scenario&#32;Intro&#32;3.png)
 
+For Alice to apply for a job at Acme Corp, she needs to obtain a certified copy of her transcript from Faber College (where she graduated from).
+
+![Scenario Intro 3.5](images/0.0&#32;Scenario&#32;Intro&#32;3.5.png)
+
+#### Use Case 4. Finding a job
+
+_To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a certified copy of her transcript from Faber College (from where she graduated with her Bachelor's degree)._
+
+This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice obtaining a certified copy of her transcript and apply for a job at Acme Corp. The following is a description the extends the overall process to include the:
+- Recruiting and Hiring business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044))
+- Issue transcript business process
+
+![Scenario Intro 4](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
+
+## Tools and Technology
+
 TODO
-
-![Scenario Intro 14](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
-
-## What Indy and Libindy are and Why They Matter
 
 Indy provides a software ecosystem for private, secure, and powerful identity, and libindy enables clients for it. Indy puts people — not the organizations that traditionally centralize identity — in charge of decisions about their own privacy and disclosure. This enables all kinds of rich innovation: connection contracts, revocation, novel payment workflows, asset and document management features, creative forms of escrow, curated reputation, integrations with other cool technologies, and so on.
 
