@@ -2,9 +2,19 @@
 
 ## Table of Contents
 
-- [Indy Walkthrough](#indy-walkthrough)
-    - [A Developer Guide for Building Indy Clients Using Libindy](#a-developer-guide-for-building-indy-clients-using-libindy)
-    - [What Indy and Libindy are and Why They Matter](#what-indy-and-libindy-are-and-why-they-matter)
+<!-- TOC -->
+
+- [HyperLedger Indy Getting Started Guide for Entperprise Architects and Developers (GSG-E)](#hyperledger-indy-getting-started-guide-for-entperprise-architects-and-developers-gsg-e)
+    - [Table of Contents](#table-of-contents)
+    - [Acknowledgements](#acknowledgements)
+    - [The Scenario: Alice Buys a Car](#the-scenario-alice-buys-a-car)
+        - [The User Story](#the-user-story)
+        - [Use Case Analysis](#use-case-analysis)
+            - [Use Case 1. Buying a car](#use-case-1-buying-a-car)
+            - [Use Case 2. Financing the car](#use-case-2-financing-the-car)
+            - [Use Case 3. Proof of employment](#use-case-3-proof-of-employment)
+            - [Use Case 4. Finding a job](#use-case-4-finding-a-job)
+    - [Tools and Technology](#tools-and-technology)
     - [What We’ll Cover](#what-well-cover)
     - [About Alice](#about-alice)
     - [Infrastructure Preparation](#infrastructure-preparation)
@@ -18,8 +28,9 @@
         - [Step 6: Credential Definition Setup](#step-6-credential-definition-setup)
     - [Alice Gets a Transcript](#alice-gets-a-transcript)
     - [Apply for a Job](#apply-for-a-job)
-    - [Apply for a Loan](#apply-for-a-loan)
     - [Explore the Code](#explore-the-code)
+
+<!-- /TOC -->
 
 ## Acknowledgements
 
