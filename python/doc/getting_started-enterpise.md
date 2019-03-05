@@ -7,14 +7,22 @@
 - [HyperLedger Indy Getting Started Guide for Entperprise Architects and Developers (GSG-E)](#hyperledger-indy-getting-started-guide-for-entperprise-architects-and-developers-gsg-e)
     - [Table of Contents](#table-of-contents)
     - [Acknowledgements](#acknowledgements)
-    - [The Scenario: Alice Buys a Car](#the-scenario-alice-buys-a-car)
-        - [The User Story](#the-user-story)
+    - [Scenario: Alice Buys a Car](#scenario-alice-buys-a-car)
+        - [User Story](#user-story)
         - [Use Case Analysis](#use-case-analysis)
             - [Use Case 1. Buying a car](#use-case-1-buying-a-car)
             - [Use Case 2. Financing the car](#use-case-2-financing-the-car)
             - [Use Case 3. Proof of employment](#use-case-3-proof-of-employment)
             - [Use Case 4. Finding a job](#use-case-4-finding-a-job)
-    - [Tools and Technology](#tools-and-technology)
+    - [Solution](#solution)
+        - [Business Process Analysis](#business-process-analysis)
+        - [Actors](#actors)
+        - [Design](#design)
+            - [Initial State](#initial-state)
+            - [Final State](#final-state)
+        - [Tools and Technology](#tools-and-technology)
+        - [Implementation](#implementation)
+        - [Walkthrough](#walkthrough)
     - [What We’ll Cover](#what-well-cover)
     - [About Alice](#about-alice)
     - [Infrastructure Preparation](#infrastructure-preparation)
@@ -37,9 +45,9 @@
 The original version of this document was from the 
 [Indy SDK](https://github.com/hyperledger/indy-sdk/blob/master/docs/getting-started/indy-walkthrough.md).
 
-## The Scenario: Alice Buys a Car
+## Scenario: Alice Buys a Car
 
-### The User Story
+### User Story
 
 The Alice Buys a Car user story is documented in the following 4 use cases:
 
@@ -96,7 +104,45 @@ This use case describes the actors, roles, business processes, and artifacts (st
 
 ![Scenario Intro 4](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
 
-## Tools and Technology
+## Solution
+
+TODO
+
+### Business Process Analysis
+
+TODO
+
+![Business Processes 1](images/0.0&#32;Scenario&#32;Intro-Business&#32;Processes&#32;1.png)
+
+TODO
+
+![Business Processes 2](images/0.0&#32;Scenario&#32;Intro-Business&#32;Processes&#32;2.png)
+
+### Actors
+
+TODO
+
+![Trust Anchors](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors.png)
+
+TODO
+
+### Design
+
+TODO
+
+#### Initial State
+
+TODO
+
+![Initial State](images/Indy-SDK-Getting-Started-0.0-InitialState.png)
+
+#### Final State
+
+TODO
+
+![Final State](images/Indy-SDK-Getting-Started-0.0-FinalState.png)
+
+### Tools and Technology
 
 TODO
 
@@ -105,6 +151,14 @@ Indy provides a software ecosystem for private, secure, and powerful identity, a
 Indy uses open-source, distributed ledger technology. These ledgers are a form of database that is provided cooperatively by a pool of participants, instead of by a giant database with a central admin. Data lives redundantly in many places, and it accrues in transactions orchestrated by many machines. Strong, industry-standard cryptography protects it. Best practices in key management and cybersecurity pervade its design. The result is a reliable, public source of truth under no single entity’s control, robust to system failure, resilient to hacking, and highly immune to subversion by hostile entities.
 
 If the concepts of cryptography and blockchain details feel mysterious, fear not: this guide will help introduce you to key concepts within Indy. You’re starting in the right place.
+
+### Implementation
+
+TODO
+
+### Walkthrough
+
+TODO
 
 ## What We’ll Cover
 
