@@ -1,10 +1,15 @@
-# HyperLedger Indy Getting Started Guide for Entperprise Architects and Developers (GSG-E) 
+# HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)
+
+## Abstract
+
+The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)_ documents an end-to-end framework for taking a business problem represented by the _Alice Buys a Car_ user story and how to work through the analysis, design, and implementation of an executable self-soveriegn identity (SSI) solution that addresses the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide using the ArchiMate visual modeling language and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governence framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
 
 ## Table of Contents
 
 <!-- TOC -->
 
-- [HyperLedger Indy Getting Started Guide for Entperprise Architects and Developers (GSG-E)](#hyperledger-indy-getting-started-guide-for-entperprise-architects-and-developers-gsg-e)
+- [HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)](#hyperledger-indy-getting-started-guide-for-enterprise-architects-and-developers-gsg-ea)
+    - [Abstract](#abstract)
     - [Table of Contents](#table-of-contents)
     - [Acknowledgements](#acknowledgements)
     - [Scenario: Alice Buys a Car](#scenario-alice-buys-a-car)
@@ -22,6 +27,7 @@
             - [Final State](#final-state)
         - [Tools and Technology](#tools-and-technology)
         - [Implementation](#implementation)
+            - [Additional Actors](#additional-actors)
         - [Walkthrough](#walkthrough)
     - [What We’ll Cover](#what-well-cover)
     - [About Alice](#about-alice)
@@ -53,8 +59,8 @@ The Alice Buys a Car user story is documented in the following 4 use cases:
 
 1. Alice wants to buy a car - a bright red Lamborghini&reg; - from Carter's Cars.
 2. To purchase the car from Carter's Cars, Alice needs to take out a loan from Thrift Bank for the entire purchase price.
-3. To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank certifying her employment, salary level, length of service, etc.
-4. To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a certified copy of her transcript from Faber College (from where she graduated with her Bachelor's degree).
+3. To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank verifying her employment, salary level, length of service, etc.
+4. To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a verifiable copy of her transcript from Faber College (from where she graduated with her Bachelor's degree).
 
 ### Use Case Analysis
 
@@ -78,27 +84,27 @@ This use case describes the actors, roles, business processes, and artifacts (st
 
 ![Scenario Intro 2](images/0.0&#32;Scenario&#32;Intro&#32;2.png)
 
-For Alice to qualify for the car loan, Alice needs to find a job (she is currently unemployed) and then present a job certificate certifying her employment, salary level, length of service, etc.
+For Alice to qualify for the car loan, Alice needs to find a job (she is currently unemployed) and then present a job certificate verifying her employment, salary level, length of service, etc.
 
 ![Scenario Intro 2.5](images/0.0&#32;Scenario&#32;Intro&#32;2.5.png)
 
 #### Use Case 3. Proof of employment
 
-_To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank certifying her employment, salary level, length of service, etc._
+_To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank verifying her employment, salary level, length of service, etc._
 
 This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice proving that she is employed and able to service the car loan. The following is a description the extends the overall process to include the Generate Proof of Employment business process.
 
 ![Scenario Intro 3](images/0.0&#32;Scenario&#32;Intro&#32;3.png)
 
-For Alice to apply for a job at Acme Corp, she needs to obtain a certified copy of her transcript from Faber College (where she graduated from).
+For Alice to apply for a job at Acme Corp, she needs to obtain a verifiable copy of her transcript from Faber College (where she graduated from).
 
 ![Scenario Intro 3.5](images/0.0&#32;Scenario&#32;Intro&#32;3.5.png)
 
 #### Use Case 4. Finding a job
 
-_To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a certified copy of her transcript from Faber College (from where she graduated with her Bachelor's degree)._
+_To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a verifiable copy of her transcript from Faber College (from where she graduated with her Bachelor's degree)._
 
-This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice obtaining a certified copy of her transcript and apply for a job at Acme Corp. The following is a description the extends the overall process to include the:
+This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice obtaining a verifiable copy of her transcript and apply for a job at Acme Corp. The following is a description the extends the overall process to include the:
 - Recruiting and Hiring business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044))
 - Issue transcript business process
 
@@ -122,7 +128,7 @@ TODO
 
 TODO
 
-![Trust Anchors](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors.png)
+![Trust Anchors 1](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors&#32;1.png)
 
 TODO
 
@@ -153,6 +159,14 @@ Indy uses open-source, distributed ledger technology. These ledgers are a form o
 If the concepts of cryptography and blockchain details feel mysterious, fear not: this guide will help introduce you to key concepts within Indy. You’re starting in the right place.
 
 ### Implementation
+
+TODO
+
+#### Additional Actors
+
+TODO
+
+![Trust Anchors 2](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors&#32;2.png)
 
 TODO
 
