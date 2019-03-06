@@ -1,14 +1,14 @@
-# HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)
+# HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (INDY GSG-EA)
 
 ## Abstract
 
-The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)_ documents an end-to-end framework for analysing a business problem such as the _Alice Buys a Car_ user story; then undertaking the design and implementation of an executable self-sovereign identity (SSI) solution that meets the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governance framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
+The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (INDY GSG-EA)_ documents an end-to-end framework for analysing a business problem such as the _Alice Buys a Car_ user story; then undertaking the design and implementation of an executable self-sovereign identity (SSI) solution that meets the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governance framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
 
 ## Table of Contents
 
 <!-- TOC -->
 
-- [HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)](#hyperledger-indy-getting-started-guide-for-enterprise-architects-and-developers-gsg-ea)
+- [HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (INDY GSG-EA)](#hyperledger-indy-getting-started-guide-for-enterprise-architects-and-developers-gsg-ea)
     - [Abstract](#abstract)
     - [Table of Contents](#table-of-contents)
     - [Acknowledgements](#acknowledgements)
