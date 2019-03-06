@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)_ documents an end-to-end framework for taking a business problem represented by the _Alice Buys a Car_ user story and how to work through the analysis, design, and implementation of an executable self-sovereign  identity (SSI) solution that addresses the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governance framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
+The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (GSG-EA)_ documents an end-to-end framework for analysing a business problem such as the _Alice Buys a Car_ user story; then undertaking the design and implementation of an executable self-sovereign identity (SSI) solution that meets the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governance framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
 
 ## Table of Contents
 
@@ -60,7 +60,7 @@ The Alice Buys a Car user story is documented in the following 4 use cases:
 1. Alice wants to buy a car - a bright red Lamborghini&reg; - from Carter's Cars.
 2. To purchase the car from Carter's Cars, Alice needs to take out a loan from Thrift Bank for the entire purchase price.
 3. To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank verifying her employment, salary level, length of service, etc.
-4. To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a verifiable copy of her transcript from Faber College (from where she graduated with her Bachelor's degree).
+4. To find a job, Alice applies as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a verifiable copy of her transcript from Faber College (from where she graduated with her Bachelor's degree).
 
 ### Use Case Analysis
 
@@ -80,7 +80,7 @@ For Alice to prove that she has the financing necessary to purchase the car, Ali
 
 _To purchase the car from Carter's Cars, Alice needs to take out a loan from Thrift Bank for the entire purchase price._
 
-This use case describes the actors, roles, business processes, and artifacts (state) involved in financing the car through Thrift Bank. The following is a description the extends the overall process to include the Car Financing business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044)).
+This use case describes the actors, roles, business processes, and artifacts (state) involved in financing the car through Thrift Bank. The following description extends the overall process to include the Car Financing business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044)).
 
 ![Scenario Intro 2](images/0.0&#32;Scenario&#32;Intro&#32;2.png)
 
@@ -92,7 +92,7 @@ For Alice to qualify for the car loan, Alice needs to find a job (she is current
 
 _To get the loan from Thrift Bank, Alice needs to find a job (Alice is currently unemployed) and present a job certificate from her employer to Thrify Bank verifying her employment, salary level, length of service, etc._
 
-This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice proving that she is employed and able to service the car loan. The following is a description the extends the overall process to include the Generate Proof of Employment business process.
+This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice proving that she is employed and able to service the car loan. The following description extends the overall process to include the Generate Proof of Employment business process.
 
 ![Scenario Intro 3](images/0.0&#32;Scenario&#32;Intro&#32;3.png)
 
@@ -104,8 +104,8 @@ For Alice to apply for a job at Acme Corp, she needs to obtain a verifiable copy
 
 _To find a job, Alice applies for as a candidate for a position at Acme Corp. To apply for a job at Acme Corp, Alice needs to include a verifiable copy of her transcript from Faber College (from where she graduated with her Bachelor's degree)._
 
-This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice obtaining a verifiable copy of her transcript and apply for a job at Acme Corp. The following is a description the extends the overall process to include the:
-- Recruiting and Hiring business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044))
+This use case describes the actors, roles, business processes, and artifacts (state) involved in Alice obtaining a verifiable copy of her transcript and apply for a job at Acme Corp. The following description extends the overall process to include the:
+- Recruiting and Hiring business process ([business collaboration](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044)), and
 - Issue transcript business process
 
 ![Scenario Intro 4](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
