@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (INDY GSG-EA)_ documents an end-to-end framework for analysing a business problem such as the _Alice Buys a Car_ user story; then undertaking the design and implementation of an executable self-sovereign identity (SSI) solution that meets the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform and the Sovrin SSI governance framework will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
+The _HyperLedger Indy Getting Started Guide for Enterprise Architects and Developers (INDY GSG-EA)_ documents an end-to-end framework for analysing a business problem such as the _Alice Buys a Car_ user story; then undertaking the design and implementation of an executable self-sovereign identity (SSI) solution that meets the requirements of this (or any similar purchasing) user story. This guide also introduces the use of several enterprise architecture concepts into the new world of SSI application analysis, design, and implementation. To achieve this goal, the guide uses the ArchiMate visual modeling language standard and the Archi open source, enterprise modeling tool for analysis and design. The implementation is a simple Python script. Architects and developers who are new to the HyperLedger Indy SSI software platform (Indy platform) and the Sovrin SSI governance framework (Sovrin framework) will gain significant new knowledge and understanding about the design and implementation of SSI solutions using the approach documented in this guide.
 
 ## Table of Contents
 
@@ -110,25 +110,63 @@ This use case describes the actors, roles, business processes, and artifacts (st
 
 ![Scenario Intro 4](images/0.0&#32;Scenario&#32;Intro&#32;4.png)
 
-## Solution
+## Analysis, Design and Implementation
 
 TODO
+
+### Scope of the Solution
+
+The scope of the solution is defined by the business processes that are involved in the creation, communication, and verification of the following credentials: TODO
+- Car Loan
+- Job Certificate
+- Transcript
+
+NOTE: The Employment Record is a document-of-record whose usage is internal to Acme Corp's operations and considered out-of-scope for this version of the solution.
+
+The corresponding set of in-scope business acitivities includes:
+B. Car Financing - a business collaboration
+C. Generate Proof of Employment - a business process
+D. Recruiting and Hiring Processes - a business collaboration
+E. Issue Transcript - a business process
+
+The difference between a _business process_ and _business collaboration_ is defined [here](http://pubs.opengroup.org/architecture/archimate3-doc/chap08.html#_Toc489946044):
+
+> A business process or function may be interpreted as the internal behavior of a single business role. In some cases, behavior is the collective effort of more than one business role; in fact, a collaboration of two or more business roles results in collective behavior which may be more than simply the sum of the behavior of the separate roles. Business collaborations represent this collective effort. Business interactions are used to describe the internal behavior that takes place within business collaboration. A collaboration is a (possibly temporary) collection of business roles or actors within an organization, which perform collaborative behavior (interactions). Unlike a department, which may also group roles, a business collaboration need not have an official (permanent) status within the organization; it is specifically aimed at a specific interaction or set of interactions between roles. It is especially useful in modeling B2B interactions between different organizations such as provider networks, and also for describing social networks.
+
+Business process A. Buying a Car is out of scope because the focus for this particular version of the solution is the creation, communication, and verification of the credentials listed above.
 
 ### Business Process Analysis
 
-TODO
+The following high-level business process view highlights the simplified linkages between the generic Setup process and each of the 4 in-scope high-level business processes.
 
 ![Business Processes 1](images/0.0&#32;Scenario&#32;Intro-Business&#32;Processes&#32;1.png)
 
-TODO
+The following (medium-level) business process view details the activities within each of the high-level business processes. 
 
 ![Business Processes 2](images/0.0&#32;Scenario&#32;Intro-Business&#32;Processes&#32;2.png)
 
+Details for each of the medium-level business processes can be found in the Design section below. 
+
 ### Actors
 
-TODO
+Before detailing each of these business processes, the list of actors involved across these processes is summarized in the following view. 
 
 ![Trust Anchors 1](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors&#32;1.png)
+
+The list of actors includes:
+- Alice
+- Carter's Cars
+- Sovrin Steward
+- Government
+- Faber College
+- Acme Corp
+- Thrift Bank
+
+Up until this point, there has not been a need to refer to any SSI concepts - neither from the Indy platform or the Sovrin framework. Now, because some of the actors need to be able to create assign SSI roles to actors as well as create new credentials (i.e. Sovrin Steward, Government, Faber College, Acme Corp, and Thrift Bank), these actors need to be assigned to roles within the Sovrin framework that are, in turn, implemented by the Indy platform.
+
+Sovrin Steward is assigned the Governance Authority role (which, in turn, implies that Sovrin Steward is also a Trust Anchor, and, in turn, an Identity Owner and DID Subject). This role enables Sovrin Steward to be able to grant other roles such as Trust Anchor to other actors.
+
+The actors that to be assigned the Trust Anchor role by Sovrin Steward include: Government, Faber College, Acme Corp, and Thrift Bank. The Trust Anchor role enables an Actor to issue new credentials. TODO By implication, an actor assigned the Trust Anchor role also inherits, in turn, the Identity Owner and DID Subject roles. The simplest explanation of the Identity Owner and DID Subject roles is that they are identified by a Decentalized Identifier (DID) which in turn is associated with a DID Document that is serialized on into the Indy Verifiable Data Registry (VDR). For more details, consult the [Indy platfom architecture reference model (INDY ARM)](https://github.com/mwherman2000/indy-arm/blob/master/README.md).
 
 TODO
 
@@ -173,30 +211,6 @@ TODO
 ### Walkthrough
 
 TODO
-
-## What We’ll Cover
-
-Our goal is to introduce you to many of the concepts of Indy and give you some idea of what happens behind the scenes to make it all work.
-
-We're going to frame the exploration with a story. Alice, a graduate of the fictional Faber College, wants to apply for a job at the fictional company Acme Corp. As soon as she has the job, she wants to apply for a loan in Thrift Bank so she can buy a car. She would like to use her college transcript as proof of her education on the job application and once hired, Alice would like to use the fact of employment as evidence of her creditworthiness for the loan.
-
-The sorts of identity and trust interactions required to pull this off are messy in the world today; they are slow, they violate privacy, and they are susceptible to fraud. We’ll show you how Indy is a quantum leap forward.
-
-Ready?
-
-## About Alice
-
-As a graduate of Faber College, Alice receives an alumni newsletter where she learns that her alma mater is offering digital transcripts. She logs in to the college alumni website and requests her transcript by clicking **Get Transcript**.  (Other ways to initiate this request might include scanning a QR code, downloading a transcript package from a published URL, etc.)
-
-Alice doesn’t realize it yet, but to use this digital transcript she will need a new type of identity — not the traditional identity that Faber College has built for her in its on-campus database, but a new and portable one that belongs to her, independent of all past and future relationships, that nobody can revoke or co-opt or correlate without her permission. This is a **_self-sovereign identity_** and it is the core feature of Indy.
-
-In normal contexts, managing a self-sovereign identity will require a tool such as a desktop or mobile application. It might be a standalone app or it might leverage a third party service provider that the ledger calls an **agency**. The Sovrin Foundation publishes reference versions of such tools. Faber College will have studied these requirements and will recommend an **_Indy app_** to Alice if she doesn’t already have one. This app will install as part of the workflow from the **Get Transcript** button.
-
-When Alice clicks **Get Transcript**, she will download a file that holds an Indy **connection request**. This connection request file, having an .indy extension and associated with her Indy app, will allow her to establish a secure channel of communication with another party in the ledger ecosystem — Faber College.
-
-So when Alice clicks **Get Transcript**, she will normally end up installing an app (if needed), launching it, and then being asked by the app whether she wants to accept a request to connect with Faber.
-
-For this guide, however, we’ll be using an **Indy SDK API** (as provided by libindy) instead of an app, so we can see what happens behind the scenes. We will pretend to be a particularly curious and technically adventurous Alice…
 
 ## Infrastructure Preparation
 
@@ -1093,11 +1107,20 @@ When **Thrift** inspects the received Proof he will see following structure:
 
 Both of Alice's Proofs have been successfully verified and she got loan from **Thrift Bank**.
 
-## Explore the Code
+## Next Steps
 
-Now that you've had a chance to see how the Libindy implementation works from the outside, perhaps you'd like to see how it works underneath, from code?
-If so, please run [Simulating Getting Started in the Jupiter](run-getting-started.md).
-You may need to be signed into GitHub to view this link.
-Also you can find the source code [here](https://github.com/hyperledger/indy-sdk/blob/master/samples/python/src/getting_started.py)
+Explore the code.
 
-If demo gives an error when executing check [Trouble Shooting Guide](Trouble_shoot_GSG.md).
+### Completed Solution
+
+The documentation, code, and outputs (execution artifacts) can be found here:
+- Code [link](../getting_started-verbose.py)
+- Console logs [link](../getting_started-verbose.log)
+- Message size analysis [link](../msg_traces)
+- Indy platfom architecture reference model (INDY ARM) [link](https://github.com/mwherman2000/indy-arm/blob/master/README.md)
+
+## Future Work
+
+- Create a strongly-typed, multi-task solution based on the Indy SDK C# .NET Wrapper
+- Full agent node solution based on the Agent Framework
+- As a second scenario, implement a supply-chain solution using business document credentials based on the OASIS UBL standard (e.g. Purchase Order, Invoice, Waybill, Delivery Confirmation, Reputation, Loyalty Points, etc.)
