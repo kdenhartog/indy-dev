@@ -20,7 +20,7 @@ async def run():
     logger.info("Open Pool Ledger: {}".format(pool_name))
     pool_genesis_txn_path = get_pool_genesis_txn_path(pool_name)
     pool_config = json.dumps({"genesis_txn": str(pool_genesis_txn_path)})
-    print(pool_config)
+    wallet_path = "/root/indy/python/.indy_client/wallet"
     
 
     # Set protocol version 2 to work with Indy Node 1.4
@@ -31,14 +31,14 @@ async def run():
     except IndyError as ex:
         if ex.error_code == ErrorCode.PoolLedgerConfigAlreadyExistsError:
             pass
-    pool_handle = await pool.open_pool_ledger(pool_name, None)
+    pool_handle = await pool.open_pool_ledger(pool_name, pool_config)
 
     logger.info("==============================")
     logger.info("=== Getting Trust Anchor credentials for Faber, Acme, Thrift and Government  ==")
     logger.info("------------------------------")
 
     logger.info("\"Sovrin Steward\" -> Create wallet")
-    steward_wallet_config = json.dumps({"id": "sovrin_steward_wallet"})
+    steward_wallet_config = json.dumps({"id": "sovrin_steward_wallet", "storage_config": {"path": wallet_path}})
     steward_wallet_credentials = json.dumps({"key": "steward_wallet_key"})
     try:
         await wallet.create_wallet(steward_wallet_config, steward_wallet_credentials)
@@ -56,7 +56,7 @@ async def run():
     logger.info("== Getting Trust Anchor credentials - Government Onboarding  ==")
     logger.info("------------------------------")
 
-    government_wallet_config = json.dumps({"id": "government_wallet"})
+    government_wallet_config = json.dumps({"id": "government_wallet", "storage_config": {"path": wallet_path}})
     government_wallet_credentials = json.dumps({"key": "government_wallet_key"})
     government_wallet, steward_government_key, government_steward_did, government_steward_key, _ \
         = await onboarding(pool_handle, "Sovrin Steward", steward_wallet, steward_did, "Government", None,
@@ -74,7 +74,7 @@ async def run():
     logger.info("== Getting Trust Anchor credentials - Faber Onboarding  ==")
     logger.info("------------------------------")
 
-    faber_wallet_config = json.dumps({"id": "faber_wallet"})
+    faber_wallet_config = json.dumps({"id": "faber_wallet", "storage_config": {"path": wallet_path}})
     faber_wallet_credentials = json.dumps({"key": "faber_wallet_key"})
     faber_wallet, steward_faber_key, faber_steward_did, faber_steward_key, _ = \
         await onboarding(pool_handle, "Sovrin Steward", steward_wallet, steward_did, "Faber", None, faber_wallet_config,
@@ -91,7 +91,7 @@ async def run():
     logger.info("== Getting Trust Anchor credentials - Acme Onboarding  ==")
     logger.info("------------------------------")
 
-    acme_wallet_config = json.dumps({"id": "acme_wallet"})
+    acme_wallet_config = json.dumps({"id": "acme_wallet", "storage_config": {"path": wallet_path}})
     acme_wallet_credentials = json.dumps({"key": "acme_wallet_key"})
     acme_wallet, steward_acme_key, acme_steward_did, acme_steward_key, _ = \
         await onboarding(pool_handle, "Sovrin Steward", steward_wallet, steward_did, "Acme", None, acme_wallet_config,
@@ -108,7 +108,7 @@ async def run():
     logger.info("== Getting Trust Anchor credentials - Thrift Onboarding  ==")
     logger.info("------------------------------")
 
-    thrift_wallet_config = json.dumps({"id": " thrift_wallet"})
+    thrift_wallet_config = json.dumps({"id": " thrift_wallet", "storage_config": {"path": wallet_path}})
     thrift_wallet_credentials = json.dumps({"key": "thrift_wallet_key"})
     thrift_wallet, steward_thrift_key, thrift_steward_did, thrift_steward_key, _ = \
         await onboarding(pool_handle, "Sovrin Steward", steward_wallet, steward_did, "Thrift", None,
@@ -180,7 +180,7 @@ async def run():
     logger.info("== Getting Transcript with Faber - Onboarding ==")
     logger.info("------------------------------")
 
-    alice_wallet_config = json.dumps({"id": " alice_wallet"})
+    alice_wallet_config = json.dumps({"id": " alice_wallet", "storage_config": {"path": wallet_path}})
     alice_wallet_credentials = json.dumps({"key": "alice_wallet_key"})
     alice_wallet, faber_alice_key, alice_faber_did, alice_faber_key, faber_alice_connection_response \
         = await onboarding(pool_handle, "Faber", faber_wallet, faber_did, "Alice", None, alice_wallet_config,
