@@ -15,3 +15,7 @@ env
 
 #pycache files
 python/src/__pycache__/
+.pytest_cache/
+
+#indy_client files
+/python/.indy_client

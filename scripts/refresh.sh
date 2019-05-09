@@ -1,3 +1,4 @@
 #!/bin/bash
 
-rm -r .indy_client
+rm -r *__pycache__*
+# rm -r .indy_client

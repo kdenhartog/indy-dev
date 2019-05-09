@@ -7,7 +7,7 @@ PROTOCOL_VERSION = 2
 
 
 def path_home() -> Path:
-    return Path.home().joinpath(".indy_client")
+    return Path(environ.get('PYTHONPATH')).joinpath(".indy_client")
 
 
 def get_pool_genesis_txn_path(pool_name):
