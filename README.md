@@ -1,3 +1,10 @@
+# NOTICE
+
+This repository has been archived for historical purposes. If you'd like to explore the easiest way to get started with Indy in Python, it's recommended that you use [Hyperledger Aries Cloud Agent - Python](https://github.com/hyperledger/aries-cloudagent-python).
+
+**The best place to start there is in the [demo section](https://github.com/hyperledger/aries-cloudagent-python/tree/master/demo)**
+
+
 # Descriptions
 This is an easy to configure development environment to play around with Hyperledger Indy. Files can be written in an IDE or text editor like VSCode on the host machine, while being able to have a consistent docker environment to run files in a simple way. It uses docker and docker images that are pre-configured to setup a pool (indy_pool) and a Indy development environment (indy_dev) and allow the devlopment environment to interact with the pool of indy_nodes. This is not intended to allow for indy-plenum, plenum-plugin, or  indy-node development. If you'd like to do that, check out sovrin's [token-plugin](https://github.com/sovrin-foundation/token-plugin#org003878b) repository.
 
