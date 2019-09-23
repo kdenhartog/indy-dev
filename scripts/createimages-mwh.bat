@@ -2,6 +2,7 @@ rmdir c:\INDY\indy-indy_dev
 mkdir c:\INDY
 c:
 cd c:\INDY
+rm indy-dev -r -f
 rem git clone https://github.com/kdenhartog/indy-dev.git
 git clone https://github.com/mwherman2000/indy-dev.git
 echo Press Enter to continue
