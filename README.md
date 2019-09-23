@@ -53,10 +53,10 @@ Alternatively, if you've not been able to get docker setup on windows, **Use the
 4. The following steps do not assume or require that you have installed the Windows 10 Linux subsystem feature installed on your Windows 10 computer.
 5. The following steps assume you have used the Docker Desktop app to share your C: (or alternate drive partitiion) with a Linux container. 
    - Start the Docker Desktop app by clicking the Docker icon in the Task Bar System Tray.
-   - Click Settings
-   - Select Share Drives
-   - Select C: (or an alternate drive)
-   - Click Apply
+   - Click `Settings`
+   - Select `Shared Drives`
+   - Select `C:` (or an alternate drive)
+   - Click `Apply`
    - When prompted, enter your local Windows 10 login credentials to enable Docker to create a shared drive.
    ![Docker Desktop: Share C: Drive](images/Win10-DockerDesktop-ShareCDrive.png)
 6. Enter the following commands using either the `Powershell` or `Windowws Command Line` console:
