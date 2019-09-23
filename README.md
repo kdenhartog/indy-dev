@@ -59,7 +59,7 @@ Alternatively, if you've not been able to get docker setup on windows, **Use the
    - Click `Apply`
    - When prompted, enter your local Windows 10 login credentials to enable Docker to create a shared drive.
    ![Docker Desktop: Share C: Drive](images/Win10-DockerDesktop-ShareCDrive.png)
-6. Enter the following commands using either the `Powershell` or `Windowws Command Line` console:
+6. Enter the following commands using either the `Windows PowerShell` or `Windows Command Line` console:
 ```
 mkdir c:\INDY
 c:
