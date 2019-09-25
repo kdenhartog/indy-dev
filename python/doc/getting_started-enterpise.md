@@ -304,6 +304,33 @@ We call the process of establish a connection **Onboarding**.
 In this tutorial we will describe the simple version of onboarding process.
 In our case, one party will always be the Trust Anchor. Real enterprise scenarios can use a more complex version.
 
+The data flow and communications pathways for this step are depicted in the following diagrams.
+
+**Government**
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.1.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.1-Interaction.png)
+
+**Faber college**
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.2.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.2-Interaction.png)
+
+**Acme Corp**
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.3.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.3-Interaction.png)
+
+**Thrift Bank**
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.3.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-1.3-Interaction.png)
+
+
 #### Connecting the Establishment
 Let's look the process of connection establishment between **Steward** and **Faber College**.
 
@@ -474,6 +501,22 @@ At this point **Faber** has a DID related to his identity in the Ledger.
 
 A **Credential Schema** can be created and saved in the Ledger by any **Trust Anchor**.
 
+The data flow and communications pathways for this step are depicted in the following diagrams.
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.0-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.1.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.2.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.3.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.3-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.4.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-2.4-Interaction.png)
+
 Here is where the **Government** creates and publishes the **Transcript** Credential Schema to the Ledger:
 
 1. The **Trust Anchor** creates the **Credential Schema** by calling the ``anoncreds.issuer_create_schema`` that returns the generated **Credential Schema**.
@@ -521,6 +564,28 @@ At this point we have the **Transcript** and the **Job-Certificate** Credential 
 **Credential Definition** is similar in that the keys that the Issuer uses for the signing of Credentials also satisfies a specific Credential Schema.
 
 **Note** It's not possible to update data in an existing Credential Definition. So, if a `CredDef` needs to be evolved (for example, a key needs to be rotated), then a new Credential Definition needs to be created by a new Issuer DID.
+
+The data flow and communications pathways for this step are depicted in the following diagrams.
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-3.0.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-3.0-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-4.0.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-4.1-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-4.2-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-4.3-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-5.0.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-5.1-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-5.2-Interaction.png)
+
+![Data flow and communications pathways](./images/Indy-SDK-Getting-Started-5.3-Interaction.png)
 
 A Credential Definition can be created and saved in the Ledger by any **Trust Anchor**. Here **Faber** creates and publishes a Credential Definition for the known **Transcript** Credential Schema to the Ledger.
 
