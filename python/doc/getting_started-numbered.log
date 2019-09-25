@@ -1,0 +1,268 @@
+indy@linuxkit-00155d000c0b:/indy-dev/python$ python3 getting_started-numbered.py
+INFO:__main__:0.0.0 Getting started -> started
+INFO:__main__:0.0.1 Open Pool Ledger: pool1
+INFO:__main__:==============================
+INFO:__main__:1.0.0 === Getting Trust Anchor credentials for Faber, Acme, Thrift and Government  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.0.1 "Sovrin Steward" -> Create wallet
+INFO:__main__:1.0.2 "Sovrin Steward" -> Create and store in Wallet DID from seed
+INFO:__main__:==============================
+INFO:__main__:1.1.0 == Getting Trust Anchor credentials - Government Onboarding  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.1.1 "Sovrin Steward" -> Create and store in Wallet "Sovrin Steward Government" DID (from to)
+INFO:__main__:1.1.2 "Sovrin Steward" -> Send Nym to Ledger for "Sovrin Steward Government" DID (from to)
+INFO:__main__:1.1.3 "Sovrin Steward" -> Send connection request to Government with "Sovrin Steward Government" DID and Nonce (simulated)
+INFO:__main__:1.1.4 "Government" -> Create wallet
+INFO:__main__:1.1.5 "Government" -> Create and store in Wallet "Government Sovrin Steward" DID (to from)
+INFO:__main__:1.1.6 "Government" -> Get key for did from "Sovrin Steward" connection request
+INFO:__main__:1.1.7 "Government" -> Anoncrypt connection response for "Sovrin Steward" with "Government Sovrin Steward" DID, Verkey and Nonce
+INFO:__main__:1.1.8 "Government" -> Send anoncrypted connection response to "Sovrin Steward" (simulated)
+INFO:__main__:1.1.9 "Sovrin Steward" -> Anondecrypt connection response from "Government"
+INFO:__main__:1.1.10 "Sovrin Steward" -> Authenticates "Government" by comparing Nonces
+INFO:__main__:1.1.11 "Sovrin Steward" -> Send Nym to Ledger for "Government Sovrin Steward" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:1.1.0 == Getting Trust Anchor credentials - Government getting Verinym  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.1.12 "Government" -> Create and store in Wallet "Government" new DID
+INFO:__main__:1.1.13 "Government" -> Authcrypt "Government DID info" for "Sovrin Steward"
+INFO:__main__:1.1.14 "Government" -> Send authcrypted "Government DID info" to Sovrin Steward (simulated)
+INFO:__main__:1.1.15 "Sovrin Steward" -> Authdecrypted "Government DID info" from Government
+INFO:__main__:1.1.16 "Sovrin Steward" -> Authenticate Government by comparing Verkeys
+INFO:__main__:1.1.17 "Sovrin Steward" -> Send Nym to Ledger for "Government DID" with TRUST_ANCHOR Role
+INFO:__main__:==============================
+INFO:__main__:1.2.0 == Getting Trust Anchor credentials - Faber Onboarding  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.2.1 "Sovrin Steward" -> Create and store in Wallet "Sovrin Steward Faber" DID (from to)
+INFO:__main__:1.2.2 "Sovrin Steward" -> Send Nym to Ledger for "Sovrin Steward Faber" DID (from to)
+INFO:__main__:1.2.3 "Sovrin Steward" -> Send connection request to Faber with "Sovrin Steward Faber" DID and Nonce (simulated)
+INFO:__main__:1.2.4 "Faber" -> Create wallet
+INFO:__main__:1.2.5 "Faber" -> Create and store in Wallet "Faber Sovrin Steward" DID (to from)
+INFO:__main__:1.2.6 "Faber" -> Get key for did from "Sovrin Steward" connection request
+INFO:__main__:1.2.7 "Faber" -> Anoncrypt connection response for "Sovrin Steward" with "Faber Sovrin Steward" DID, Verkey and Nonce
+INFO:__main__:1.2.8 "Faber" -> Send anoncrypted connection response to "Sovrin Steward" (simulated)
+INFO:__main__:1.2.9 "Sovrin Steward" -> Anondecrypt connection response from "Faber"
+INFO:__main__:1.2.10 "Sovrin Steward" -> Authenticates "Faber" by comparing Nonces
+INFO:__main__:1.2.11 "Sovrin Steward" -> Send Nym to Ledger for "Faber Sovrin Steward" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:1.2.0 == Getting Trust Anchor credentials - Faber getting Verinym  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.2.12 "Faber" -> Create and store in Wallet "Faber" new DID
+INFO:__main__:1.2.13 "Faber" -> Authcrypt "Faber DID info" for "Sovrin Steward"
+INFO:__main__:1.2.14 "Faber" -> Send authcrypted "Faber DID info" to Sovrin Steward (simulated)
+INFO:__main__:1.2.15 "Sovrin Steward" -> Authdecrypted "Faber DID info" from Faber
+INFO:__main__:1.2.16 "Sovrin Steward" -> Authenticate Faber by comparing Verkeys
+INFO:__main__:1.2.17 "Sovrin Steward" -> Send Nym to Ledger for "Faber DID" with TRUST_ANCHOR Role
+INFO:__main__:==============================
+INFO:__main__:1.3.0 == Getting Trust Anchor credentials - Acme Onboarding  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.3.1 "Sovrin Steward" -> Create and store in Wallet "Sovrin Steward Acme" DID (from to)
+INFO:__main__:1.3.2 "Sovrin Steward" -> Send Nym to Ledger for "Sovrin Steward Acme" DID (from to)
+INFO:__main__:1.3.3 "Sovrin Steward" -> Send connection request to Acme with "Sovrin Steward Acme" DID and Nonce (simulated)
+INFO:__main__:1.3.4 "Acme" -> Create wallet
+INFO:__main__:1.3.5 "Acme" -> Create and store in Wallet "Acme Sovrin Steward" DID (to from)
+INFO:__main__:1.3.6 "Acme" -> Get key for did from "Sovrin Steward" connection request
+INFO:__main__:1.3.7 "Acme" -> Anoncrypt connection response for "Sovrin Steward" with "Acme Sovrin Steward" DID, Verkey and Nonce
+INFO:__main__:1.3.8 "Acme" -> Send anoncrypted connection response to "Sovrin Steward" (simulated)
+INFO:__main__:1.3.9 "Sovrin Steward" -> Anondecrypt connection response from "Acme"
+INFO:__main__:1.3.10 "Sovrin Steward" -> Authenticates "Acme" by comparing Nonces
+INFO:__main__:1.3.11 "Sovrin Steward" -> Send Nym to Ledger for "Acme Sovrin Steward" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:1.3.0 == Getting Trust Anchor credentials - Acme getting Verinym  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.3.12 "Acme" -> Create and store in Wallet "Acme" new DID
+INFO:__main__:1.3.13 "Acme" -> Authcrypt "Acme DID info" for "Sovrin Steward"
+INFO:__main__:1.3.14 "Acme" -> Send authcrypted "Acme DID info" to Sovrin Steward (simulated)
+INFO:__main__:1.3.15 "Sovrin Steward" -> Authdecrypted "Acme DID info" from Acme
+INFO:__main__:1.3.16 "Sovrin Steward" -> Authenticate Acme by comparing Verkeys
+INFO:__main__:1.3.17 "Sovrin Steward" -> Send Nym to Ledger for "Acme DID" with TRUST_ANCHOR Role
+INFO:__main__:==============================
+INFO:__main__:1.4.0 == Getting Trust Anchor credentials - Thrift Onboarding  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.4.1 "Sovrin Steward" -> Create and store in Wallet "Sovrin Steward Thrift" DID (from to)
+INFO:__main__:1.4.2 "Sovrin Steward" -> Send Nym to Ledger for "Sovrin Steward Thrift" DID (from to)
+INFO:__main__:1.4.3 "Sovrin Steward" -> Send connection request to Thrift with "Sovrin Steward Thrift" DID and Nonce (simulated)
+INFO:__main__:1.4.4 "Thrift" -> Create wallet
+INFO:__main__:1.4.5 "Thrift" -> Create and store in Wallet "Thrift Sovrin Steward" DID (to from)
+INFO:__main__:1.4.6 "Thrift" -> Get key for did from "Sovrin Steward" connection request
+INFO:__main__:1.4.7 "Thrift" -> Anoncrypt connection response for "Sovrin Steward" with "Thrift Sovrin Steward" DID, Verkey and Nonce
+INFO:__main__:1.4.8 "Thrift" -> Send anoncrypted connection response to "Sovrin Steward" (simulated)
+INFO:__main__:1.4.9 "Sovrin Steward" -> Anondecrypt connection response from "Thrift"
+INFO:__main__:1.4.10 "Sovrin Steward" -> Authenticates "Thrift" by comparing Nonces
+INFO:__main__:1.4.11 "Sovrin Steward" -> Send Nym to Ledger for "Thrift Sovrin Steward" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:1.4.0 == Getting Trust Anchor credentials - Thrift getting Verinym  ==
+INFO:__main__:------------------------------
+INFO:__main__:1.4.12 "Thrift" -> Create and store in Wallet "Thrift" new DID
+INFO:__main__:1.4.13 "Thrift" -> Authcrypt "Thrift DID info" for "Sovrin Steward"
+INFO:__main__:1.4.14 "Thrift" -> Send authcrypted "Thrift DID info" to Sovrin Steward (simulated)
+INFO:__main__:1.4.15 "Sovrin Steward" -> Authdecrypted "Thrift DID info" from Thrift
+INFO:__main__:1.4.16 "Sovrin Steward" -> Authenticate Thrift by comparing Verkeys
+INFO:__main__:1.4.17 "Sovrin Steward" -> Send Nym to Ledger for "Thrift DID" with TRUST_ANCHOR Role
+INFO:__main__:==============================
+INFO:__main__:2.1.0 === Credential Schemas Setup ==
+INFO:__main__:------------------------------
+INFO:__main__:2.1.1 "Government" -> Create "Job-Certificate" Schema
+INFO:__main__:2.1.2 "Government" -> Send "Job-Certificate" Schema to Ledger
+INFO:__main__:2.2.1 "Government" -> Create "Transcript" Schema
+INFO:__main__:2.2.2 "Government" -> Send "Transcript" Schema to Ledger
+INFO:__main__:==============================
+INFO:__main__:2.3.0 === Faber Credential Definition Setup ==
+INFO:__main__:------------------------------
+INFO:__main__:2.3.1 "Faber" -> Get "Transcript" Schema from Ledger
+INFO:__main__:2.3.2 "Faber" -> Create and store in Wallet "Faber Transcript" Credential Definition
+INFO:__main__:2.3.3 "Faber" -> Send  "Faber Transcript" Credential Definition to Ledger
+INFO:__main__:==============================
+INFO:__main__:2.4.0 === Acme Credential Definition Setup ==
+INFO:__main__:------------------------------
+INFO:__main__:2.4.1 "Acme" -> Get from Ledger "Job-Certificate" Schema
+INFO:__main__:2.4.2 "Acme" -> Create and store in Wallet "Acme Job-Certificate" Credential Definition
+INFO:__main__:2.4.3 "Acme" -> Send "Acme Job-Certificate" Credential Definition to Ledger
+INFO:__main__:==============================
+INFO:__main__:3.0.0 === Getting Transcript with Faber ==
+INFO:__main__:==============================
+INFO:__main__:3.1.0 == Getting Transcript with Faber - Onboarding ==
+INFO:__main__:------------------------------
+INFO:__main__:3.1.1 "Faber" -> Create and store in Wallet "Faber Alice" DID (from to)
+INFO:__main__:3.1.2 "Faber" -> Send Nym to Ledger for "Faber Alice" DID (from to)
+INFO:__main__:3.1.3 "Faber" -> Send connection request to Alice with "Faber Alice" DID and Nonce (simulated)
+INFO:__main__:3.1.4 "Alice" -> Create wallet
+INFO:__main__:3.1.5 "Alice" -> Create and store in Wallet "Alice Faber" DID (to from)
+INFO:__main__:3.1.6 "Alice" -> Get key for did from "Faber" connection request
+INFO:__main__:3.1.7 "Alice" -> Anoncrypt connection response for "Faber" with "Alice Faber" DID, Verkey and Nonce
+INFO:__main__:3.1.8 "Alice" -> Send anoncrypted connection response to "Faber" (simulated)
+INFO:__main__:3.1.9 "Faber" -> Anondecrypt connection response from "Alice"
+INFO:__main__:3.1.10 "Faber" -> Authenticates "Alice" by comparing Nonces
+INFO:__main__:3.1.11 "Faber" -> Send Nym to Ledger for "Alice Faber" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:3.2.0 == Getting Transcript with Faber - Getting Transcript Credential ==
+INFO:__main__:------------------------------
+INFO:__main__:3.2.1 "Faber" -> Create "Transcript" Credential Offer for Alice
+INFO:__main__:3.2.2 "Faber" -> Get key for Alice did
+INFO:__main__:3.2.3 "Faber" -> Authcrypt "Transcript" Credential Offer for Alice
+INFO:__main__:3.2.4 "Faber" -> Send authcrypted "Transcript" Credential Offer to Alice (simulated)
+INFO:__main__:3.2.5 "Alice" -> Authdecrypted "Transcript" Credential Offer from Faber
+INFO:__main__:3.2.6 "Alice" -> Create and store "Alice" Master Secret in Wallet
+INFO:__main__:3.2.7 "Alice" -> Get "Faber Transcript" Credential Definition from Ledger
+INFO:__main__:3.2.8 "Alice" -> Create "Transcript" Credential Request for Faber
+INFO:__main__:3.2.9 "Alice" -> Authcrypt "Transcript" Credential Request for Faber
+INFO:__main__:3.2.10 "Alice" -> Send authcrypted "Transcript" Credential Request to Faber (simulated)
+INFO:__main__:3.2.11 "Faber" -> Authdecrypt "Transcript" Credential Request from Alice
+INFO:__main__:3.2.12 "Faber" -> Create "Transcript" Credential for Alice
+INFO:__main__:3.2.13 "Faber" -> Authcrypt "Transcript" Credential for Alice
+INFO:__main__:3.2.14 "Faber" -> Send authcrypted "Transcript" Credential to Alice (simulated)
+INFO:__main__:3.2.15 "Alice" -> Authdecrypted "Transcript" Credential from Faber
+INFO:__main__:3.2.16 "Alice" -> Store "Transcript" Credential from Faber
+INFO:__main__:==============================
+INFO:__main__:4.1.0 === Apply for the job with Acme ==
+INFO:__main__:==============================
+INFO:__main__:4.1.0 == Apply for the job with Acme - Onboarding ==
+INFO:__main__:------------------------------
+INFO:__main__:4.1.1 "Acme" -> Create and store in Wallet "Acme Alice" DID (from to)
+INFO:__main__:4.1.2 "Acme" -> Send Nym to Ledger for "Acme Alice" DID (from to)
+INFO:__main__:4.1.3 "Acme" -> Send connection request to Alice with "Acme Alice" DID and Nonce (simulated)
+INFO:__main__:4.1.5 "Alice" -> Create and store in Wallet "Alice Acme" DID (to from)
+INFO:__main__:4.1.6 "Alice" -> Get key for did from "Acme" connection request
+INFO:__main__:4.1.7 "Alice" -> Anoncrypt connection response for "Acme" with "Alice Acme" DID, Verkey and Nonce
+INFO:__main__:4.1.8 "Alice" -> Send anoncrypted connection response to "Acme" (simulated)
+INFO:__main__:4.1.9 "Acme" -> Anondecrypt connection response from "Alice"
+INFO:__main__:4.1.10 "Acme" -> Authenticates "Alice" by comparing Nonces
+INFO:__main__:4.1.11 "Acme" -> Send Nym to Ledger for "Alice Acme" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:4.2.0 == Apply for the job with Acme - Transcript proving ==
+INFO:__main__:------------------------------
+INFO:__main__:4.2.1 "Acme" -> Create "Job-Application" Proof Request
+INFO:__main__:4.2.2 "Acme" -> Get key for Alice did
+INFO:__main__:4.2.3 "Acme" -> Authcrypt "Job-Application" Proof Request for Alice
+INFO:__main__:4.2.4 "Acme" -> Send authcrypted "Job-Application" Proof Request to Alice (simulated)
+INFO:__main__:4.2.5 "Alice" -> Authdecrypt "Job-Application" Proof Request from Acme
+INFO:__main__:4.2.6 "Alice" -> Get credentials for "Job-Application" Proof Request
+INFO:__main__:4.2.7 "Alice" -> Get Schema from Ledger
+INFO:__main__:4.2.8 "Alice" -> Get Claim Definition from Ledger
+INFO:__main__:4.2.9 "Alice" -> Create "Job-Application" Proof
+INFO:__main__:4.2.10 "Alice" -> Authcrypt "Job-Application" Proof for Acme
+INFO:__main__:4.2.11 "Alice" -> Send authcrypted "Job-Application" Proof to Acme (simulated)
+INFO:__main__:4.2.12 "Acme" -> Authdecrypted "Job-Application" Proof from Alice
+INFO:__main__:4.2.14 "Acme" -> Get Schema from Ledger
+INFO:__main__:4.2.15 "Acme" -> Get Claim Definition from Ledger
+INFO:__main__:4.2.15 "Acme" -> Verify "Job-Application" Proof from Alice
+INFO:__main__:==============================
+INFO:__main__:4.3.0 == Apply for the job with Acme - Getting Job-Certificate Credential ==
+INFO:__main__:------------------------------
+INFO:__main__:4.3.1 "Acme" -> Create "Job-Certificate" Credential Offer for Alice
+INFO:__main__:4.2.2 "Acme" -> Get key for Alice did
+INFO:__main__:4.3.3 "Acme" -> Authcrypt "Job-Certificate" Credential Offer for Alice
+INFO:__main__:4.3.4 "Acme" -> Send authcrypted "Job-Certificate" Credential Offer to Alice (simulated)
+INFO:__main__:4.3.5 "Alice" -> Authdecrypted "Job-Certificate" Credential Offer from Acme
+INFO:__main__:4.3.6 "Alice" -> Get "Acme Job-Certificate" Credential Definition from Ledger
+INFO:__main__:4.3.7 "Alice" -> Create and store in Wallet "Job-Certificate" Credential Request for Acme
+INFO:__main__:4.3.8 "Alice" -> Authcrypt "Job-Certificate" Credential Request for Acme
+INFO:__main__:4.3.9 "Alice" -> Send authcrypted "Job-Certificate" Credential Request to Acme (simulated)
+INFO:__main__:4.3.10 "Acme" -> Authdecrypt "Job-Certificate" Credential Request from Alice
+INFO:__main__:4.3.11 "Acme" -> Create "Job-Certificate" Credential for Alice
+INFO:__main__:4.3.12 "Acme" -> Authcrypt "Job-Certificate" Credential for Alice
+INFO:__main__:4.3.13 "Acme" -> Send authcrypted "Job-Certificate" Credential to Alice (simulated)
+INFO:__main__:4.3.14 "Alice" -> Authdecrypted "Job-Certificate" Credential from Acme
+INFO:__main__:4.3.15 "Alice" -> Store "Job-Certificate" Credential
+INFO:__main__:==============================
+INFO:__main__:5.1.0 === Apply for the loan with Thrift ==
+INFO:__main__:==============================
+INFO:__main__:5.1.0 == Apply for the loan with Thrift - Onboarding ==
+INFO:__main__:------------------------------
+INFO:__main__:5.1.1 "Thrift" -> Create and store in Wallet "Thrift Alice" DID (from to)
+INFO:__main__:5.1.2 "Thrift" -> Send Nym to Ledger for "Thrift Alice" DID (from to)
+INFO:__main__:5.1.3 "Thrift" -> Send connection request to Alice with "Thrift Alice" DID and Nonce (simulated)
+INFO:__main__:5.1.5 "Alice" -> Create and store in Wallet "Alice Thrift" DID (to from)
+INFO:__main__:5.1.6 "Alice" -> Get key for did from "Thrift" connection request
+INFO:__main__:5.1.7 "Alice" -> Anoncrypt connection response for "Thrift" with "Alice Thrift" DID, Verkey and Nonce
+INFO:__main__:5.1.8 "Alice" -> Send anoncrypted connection response to "Thrift" (simulated)
+INFO:__main__:5.1.9 "Thrift" -> Anondecrypt connection response from "Alice"
+INFO:__main__:5.1.10 "Thrift" -> Authenticates "Alice" by comparing Nonces
+INFO:__main__:5.1.11 "Thrift" -> Send Nym to Ledger for "Alice Thrift" DID (to from)
+INFO:__main__:==============================
+INFO:__main__:5.2.0 == Apply for the loan with Thrift - Job-Certificate proving  ==
+INFO:__main__:------------------------------
+INFO:__main__:5.2.1 "Thrift" -> Create "Loan-Application-Basic" Proof Request
+INFO:__main__:5.2.2 "Thrift" -> Get key for Alice did
+INFO:__main__:5.2.3 "Thrift" -> Authcrypt "Loan-Application-Basic" Proof Request for Alice
+INFO:__main__:5.2.4 "Thrift" -> Send authcrypted "Loan-Application-Basic" Proof Request to Alice (simulated)
+INFO:__main__:5.2.5 "Alice" -> Authdecrypt "Loan-Application-Basic" Proof Request from Thrift
+INFO:__main__:5.2.6 "Alice" -> Get credentials for "Loan-Application-Basic" Proof Request
+INFO:__main__:5.2.7 "Alice" -> Get Schema from Ledger
+INFO:__main__:5.2.8 "Alice" -> Get Claim Definition from Ledger
+INFO:__main__:5.2.9 "Alice" -> Create "Loan-Application-Basic" Proof
+INFO:__main__:5.2.10 "Alice" -> Authcrypt "Loan-Application-Basic" Proof for Thrift
+INFO:__main__:5.2.11 "Alice" -> Send authcrypted "Loan-Application-Basic" Proof to Thrift (simulated)
+INFO:__main__:5.2.12 "Thrift" -> Authdecrypted "Loan-Application-Basic" Proof from Alice
+INFO:__main__:5.2.13.1"Thrift" -> Get Schemas, Credential Definitions and Revocation Registries from Ledger required for Proof verifying
+INFO:__main__:5.2.14 "Thrift" -> Get Schema from Ledger
+INFO:__main__:5.2.15 "Thrift" -> Get Claim Definition from Ledger
+INFO:__main__:5.2.16 "Thrift" -> Verify "Loan-Application-Basic" Proof from Alice
+INFO:__main__:==============================
+INFO:__main__:5.3.0 == Apply for the loan with Thrift - Transcript and Job-Certificate proving  ==
+INFO:__main__:------------------------------
+INFO:__main__:5.3.1 "Thrift" -> Create "Loan-Application-KYC" Proof Request
+INFO:__main__:5.2.2 "Thrift" -> Get key for Alice did
+INFO:__main__:5.3.3 "Thrift" -> Authcrypt "Loan-Application-KYC" Proof Request for Alice
+INFO:__main__:5.3.4 "Thrift" -> Send authcrypted "Loan-Application-KYC" Proof Request to Alice (simulated)
+INFO:__main__:5.3.5 "Alice" -> Authdecrypt "Loan-Application-KYC" Proof Request from Thrift
+INFO:__main__:5.3.6 "Alice" -> Get credentials for "Loan-Application-KYC" Proof Request
+INFO:__main__:5.3.7 "Alice" -> Get Schema from Ledger
+INFO:__main__:5.3.8 "Alice" -> Get Claim Definition from Ledger
+INFO:__main__:5.3.9 "Alice" -> Create "Loan-Application-KYC" Proof
+INFO:__main__:5.3.10 "Alice" -> Authcrypt "Loan-Application-KYC" Proof for Thrift
+INFO:__main__:5.3.11 "Alice" -> Send authcrypted "Loan-Application-KYC" Proof to Thrift (simulated)
+INFO:__main__:5.3.12 "Thrift" -> Authdecrypted "Loan-Application-KYC" Proof from Alice
+INFO:__main__:5.3.13.1 "Thrift" -> Get Schemas, Credential Definitions and Revocation Registries from Ledger required for Proof verifying
+INFO:__main__:5.3.14 "Thrift" -> Get Schema from Ledger
+INFO:__main__:5.3.15 "Thrift" -> Get Claim Definition from Ledger
+INFO:__main__:5.3.16 "Thrift" -> Verify "Loan-Application-KYC" Proof from Alice
+INFO:__main__:==============================
+INFO:__main__:6.0.1 "Sovrin Steward" -> Close and Delete wallet
+INFO:__main__:6.0.2 "Government" -> Close and Delete wallet
+INFO:__main__:6.0.3 "Faber" -> Close and Delete wallet
+INFO:__main__:6.0.4 "Acme" -> Close and Delete wallet
+INFO:__main__:6.0.5 "Thrift" -> Close and Delete wallet
+INFO:__main__:6.0.6 "Alice" -> Close and Delete wallet
+INFO:__main__:6.0.7 Close and Delete pool
+INFO:__main__:6.0.0 Getting started -> done
+indy@linuxkit-00155d000c0b:/indy-dev/python$

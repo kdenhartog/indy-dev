@@ -1,0 +1,1 @@
+5.1.7 Connection Response: {"did": "did:mymethod:A12UxLhMVUMvkYEF6h7oXn", "nonce": 123456789, "verkey": "5uXFtq9ZybW5ee7CEDKvbx3tK6iyCg1nJHoB6JnL1Aba"}

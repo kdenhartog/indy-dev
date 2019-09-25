@@ -1,0 +1,1 @@
+5.2.14 GET_SCHEMA_REQ:  {"reqId":1548995641279899300,"identifier":"4nhFNcZyRqo4TCzvftJ6xA","operation":{"type":"107","dest":"G8kZXsNRZZaARbMS6BQkWo","data":{"name":"Job-Certificate","version":"0.2"}},"protocolVersion":2}

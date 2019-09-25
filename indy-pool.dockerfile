@@ -30,7 +30,7 @@ ARG indy_node_ver=1.6.576
 ARG python3_indy_crypto_ver=0.4.3
 ARG indy_crypto_ver=0.4.3
 
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update -y && apt-get install -y --allow-unauthenticated \
         indy-plenum=${indy_plenum_ver} \
         indy-anoncreds=${indy_anoncreds_ver} \
         indy-node=${indy_node_ver} \

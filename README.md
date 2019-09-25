@@ -60,22 +60,24 @@ Alternatively, if you've not been able to get docker setup on windows, **Use the
 4. The following steps do not assume or require that you have installed the Windows 10 Linux subsystem feature installed on your Windows 10 computer.
 5. The following steps assume you have used the Docker Desktop app to share your C: (or alternate drive partitiion) with a Linux container. 
    - Start the Docker Desktop app by clicking the Docker icon in the Task Bar System Tray.
-   - Click Settings
-   - Select Share Drives
-   - Select C: (or an alternate drive)
-   - Click Apply
+   - Click `Settings`
+   - Select `Shared Drives`
+   - Select `C:` (or an alternate drive)
+   - Click `Apply`
    - When prompted, enter your local Windows 10 login credentials to enable Docker to create a shared drive.
    ![Docker Desktop: Share C: Drive](images/Win10-DockerDesktop-ShareCDrive.png)
-6. Enter the following commands using either the `Powershell` or `Windowws Command Line` console:
+6. Enter the following commands using either the `Windows PowerShell` or `Windows Command Line` console:
 ```
 mkdir c:\INDY
 c:
 cd c:\INDY
-git clone https://github.com/kdenhartog/indy-dev.git
+rem git clone https://github.com/kdenhartog/indy-dev.git
+git clone https://github.com/mwherman2000/indy-dev.git
 
 cd indy-dev
 docker build -f indy-pool.dockerfile -t indy_pool .
 docker build -f indy-dev.dockerfile -t indy_dev .
+
 docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
 docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev indy_dev
 ```
@@ -83,15 +85,31 @@ NOTE: The construction `C:/INDY/indy-dev:/indy-dev` is necessary under Windows 1
 
 REFERENCE:  https://forums.docker.com/t/volume-mounts-in-windows-does-not-work/10693/7
 
+To reset the environment, simply re-run these two commands:
+```
+docker run -itd --net=host -p 127.0.0.1:9701-9708:9701-9708 indy_pool
+docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev indy_dev
+```
+
 ## Test Python environment
-Once inside the docker shell (started in step 2 of "how to start"):
+Once inside the docker shell (started in step 2 of "how to start"),
+enter the following commands:
 
 ```
+cd /
+cd indy-dev
 cd python
 python3 getting_started.py
 ```
-
 If the getting started guide completes through the end of cleanup everything is working correctly.
+
+The initial console output will look something like the following:
+
+![python3 getting_started.py console output - start](images/python3-getting_started_py-start.png)
+
+...and when finished, the last part of the console output will look something like:
+
+![python3 getting_started.py console output -end](images/python3-getting_started_py-end.png)
 
 ## Going through the IndySDK How-to guides
 
