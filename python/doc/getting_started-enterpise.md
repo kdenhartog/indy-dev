@@ -112,13 +112,14 @@ This use case describes the actors, roles, business processes, and artifacts (st
 
 ## Analysis, Design and Implementation
 
-TODO
+This section describes a high-level enteprise application development approach to the analysis, design and implementation of a solution for the _Alice Buys a Car_ user story.
 
 ### Scope of the Solution
 
-The scope of the solution is defined by the business processes that are involved in the creation, communication, and verification of the following credentials: TODO
+The scope of the solution is defined by the business processes that are involved in the creation, communication, and verification of the following credentials: 
 - Car Loan
 - Job Certificate
+- Employmnent Record
 - Transcript
 
 NOTE: The Employment Record is a document-of-record whose usage is internal to Acme Corp's operations and considered out-of-scope for this version of the solution.
@@ -166,51 +167,54 @@ Up until this point, there has not been a need to refer to any SSI concepts - ne
 
 Sovrin Steward is assigned the Governance Authority role (which, in turn, implies that Sovrin Steward is also a Trust Anchor, and, in turn, an Identity Owner and DID Subject). This role enables Sovrin Steward to be able to grant other roles such as Trust Anchor to other actors.
 
-The actors that to be assigned the Trust Anchor role by Sovrin Steward include: Government, Faber College, Acme Corp, and Thrift Bank. The Trust Anchor role enables an Actor to issue new credentials. TODO By implication, an actor assigned the Trust Anchor role also inherits, in turn, the Identity Owner and DID Subject roles. The simplest explanation of the Identity Owner and DID Subject roles is that they are identified by a Decentalized Identifier (DID) which in turn is associated with a DID Document that is serialized on into the Indy Verifiable Data Registry (VDR). For more details, consult the [Indy platfom architecture reference model (INDY ARM)](https://github.com/mwherman2000/indy-arm/blob/master/README.md).
+The actors that to be assigned the Trust Anchor role by Sovrin Steward include: Government, Faber College, Acme Corp, and Thrift Bank. The Trust Anchor role enables an Actor to issue new credentials. 
 
-TODO
+By implication, an actor assigned the Trust Anchor role also inherits, in turn, the Identity Owner and DID Subject roles. The simplest explanation of the Identity Owner and DID Subject roles is that they are identified by a Decentalized Identifier (DID) which in turn is associated with a DID Document that is serialized on into the Indy Verifiable Data Registry (VDR). For more details, consult the [Indy platfom architecture reference model (INDY ARM)](https://github.com/mwherman2000/indy-arm/blob/master/README.md) and the [Sovrin Governance Framework Comprehensive Architecture Reference Model (SOVRIN ARM)](https://github.com/mwherman2000/sovrin-arm/blob/master/README.md).
 
 ### Design
 
-TODO
+The high-level design of the business process (and hence the structure and flow of the script) is defined as the Initial State.  See below.
+
+The Final State that follows the Initial State details the final version of the business process to be implemented in the script.
 
 #### Initial State
 
-TODO
+The Initial State is documented in the following diagram.
 
 ![Initial State](images/Indy-SDK-Getting-Started-0.0-InitialState.png)
 
 #### Final State
 
-TODO
+The Final State is documented in the following diagram.
 
 ![Final State](images/Indy-SDK-Getting-Started-0.0-FinalState.png)
 
 ### Tools and Technology
 
-TODO
-
-Indy provides a software ecosystem for private, secure, and powerful identity, and libindy enables clients for it. Indy puts people — not the organizations that traditionally centralize identity — in charge of decisions about their own privacy and disclosure. This enables all kinds of rich innovation: connection contracts, revocation, novel payment workflows, asset and document management features, creative forms of escrow, curated reputation, integrations with other cool technologies, and so on.
+Hyperledger Indy (and its successor, Hyperledger Aries) provides a software ecosystem for private, secure, and powerful identity, and `libindy` enables clients for it. Indy puts people — not the organizations that traditionally centralize identity — in charge of decisions about their own privacy and disclosure. This enables all kinds of rich innovation: connection contracts, revocation, novel payment workflows, asset and document management features, creative forms of escrow, curated reputation, integrations with other cool technologies, and so on.
 
 Indy uses open-source, distributed ledger technology. These ledgers are a form of database that is provided cooperatively by a pool of participants, instead of by a giant database with a central admin. Data lives redundantly in many places, and it accrues in transactions orchestrated by many machines. Strong, industry-standard cryptography protects it. Best practices in key management and cybersecurity pervade its design. The result is a reliable, public source of truth under no single entity’s control, robust to system failure, resilient to hacking, and highly immune to subversion by hostile entities.
 
 If the concepts of cryptography and blockchain details feel mysterious, fear not: this guide will help introduce you to key concepts within Indy. You’re starting in the right place.
 
-### Implementation
+### Additional Implementation Details
 
-TODO
+The additional design and implementation details include those aspects of the solution that are driven by the architectural and technical requirements of the chosen platform (Indy).
 
 #### Additional Actors
 
-TODO
+The additional roles, group and actors (and their relationships) are illustrated in the following diagram.
 
 ![Trust Anchors 2](images/0.0&#32;Scenario&#32;Intro-Trust&#32;Anchors&#32;2.png)
 
-TODO
-
 ### Walkthrough
 
-TODO
+The walkthrough is unique in its explanation of the the _Alice Buys a Car_ user story in that it provides strong correlation between the following artifacts as an aid in understanding the Indy platform and how it can be used to design and implement similar user stories and use cases:
+
+- `getting_started-numbered.py` Script
+- Numbered Trace File
+- Communication Diagrams
+- Getting Started Guide (INDY GSG-EA) - this document
 
 ## Infrastructure Preparation
 
