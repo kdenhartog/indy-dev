@@ -41,7 +41,7 @@ to cleanup the docker images built run: `sudo make cleanup`
 
 to refresh the container and cleanup the data in the wallets and the pool.txn file use `sudo make refresh`
 
-## Windows
+## Windows Setup Guide
 The steps below have been tested with Windows 10 Professional but the following previous caveat still applies: Your mileage may vary on Windows and will be tougher to work with, continue at your own risk.
 
 Alternatively, if you've not been able to get docker setup on windows, **Use the in-browser setup instead.**
@@ -85,8 +85,7 @@ docker run -it --net=host -p 127.0.0.1:8080:8080 -v C:/INDY/indy-dev:/indy-dev i
 ```
 
 ## Test Python environment
-Once inside the docker shell (started in step 2 of "how to start"),
-enter the following commands:
+Once the above two `docker` commands have been executed, the Docker shell will start with a '$' prompt. Inside the docker shell, enter the following commands:
 
 ```
 cd /
@@ -94,7 +93,7 @@ cd indy-dev
 cd python
 python3 getting_started.py
 ```
-If the getting started guide completes through the end of cleanup everything is working correctly.
+If the Getting Started Guide script completes through the end of cleanup, everything is working correctly.
 
 The initial console output will look something like the following:
 
